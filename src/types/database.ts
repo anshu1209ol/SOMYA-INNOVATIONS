@@ -64,6 +64,15 @@ export interface Profile {
   job_title: string | null
   department: string | null
   is_active: boolean
+  status?: 'invited' | 'active' | 'suspended' | 'terminated'
+  terminated_at?: string | null
+  terminated_by?: string | null
+  termination_reason?: string | null
+  suspended_at?: string | null
+  suspended_by?: string | null
+  suspension_reason?: string | null
+  joining_date?: string | null
+  last_login_at?: string | null
   created_at: string
   updated_at: string
 }
@@ -546,6 +555,31 @@ export interface LeaveRequest {
   updated_at?: string
 }
 
+export interface AuditLog {
+  id: string
+  actor_id: string | null
+  action: string
+  target_user_id: string | null
+  entity_type: string
+  entity_id: string | null
+  reason: string | null
+  metadata: Record<string, unknown>
+  created_at: string
+}
+
+export interface Permission {
+  name: string
+  description: string | null
+  category: string
+  created_at: string
+}
+
+export interface RolePermission {
+  role: AppRole
+  permission_name: string
+  created_at: string
+}
+
 
 // ─── Supabase Database Type ────────────────────────────────────────────────
 
@@ -804,6 +838,21 @@ export type Database = {
         },
         Partial<Omit<QuoteRequest, 'id'>>
       >
+      audit_logs: TableDef<
+        AuditLog,
+        Omit<AuditLog, 'id' | 'created_at'> & { id?: string; created_at?: string },
+        Partial<Omit<AuditLog, 'id'>>
+      >
+      permissions: TableDef<
+        Permission,
+        Omit<Permission, 'created_at'> & { created_at?: string },
+        Partial<Permission>
+      >
+      role_permissions: TableDef<
+        RolePermission,
+        Omit<RolePermission, 'created_at'> & { created_at?: string },
+        Partial<RolePermission>
+      >
     }
     Views: {
       [_ in never]: never
@@ -815,6 +864,14 @@ export type Database = {
       }
       has_role: {
         Args: { p_user_id: string; p_role: AppRole }
+        Returns: boolean
+      }
+      has_permission: {
+        Args: { p_user_id: string; p_permission: string }
+        Returns: boolean
+      }
+      is_account_active: {
+        Args: { p_user_id: string }
         Returns: boolean
       }
       is_admin: {

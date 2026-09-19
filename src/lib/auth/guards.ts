@@ -2,6 +2,16 @@ import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import type { AppRole, Profile } from '@/types'
 
+export interface UserContext {
+  user: {
+    id: string
+    email?: string
+  }
+  profile: Profile
+  roles: AppRole[]
+  permissions: string[]
+}
+
 /**
  * Get current authenticated user or null.
  * Safe to call from Server Components and Server Actions.
@@ -44,58 +54,121 @@ export async function getCurrentProfile(): Promise<
 }
 
 /**
- * Require authentication. Redirects to /login if not authenticated.
- * Returns the authenticated user.
+ * Get full user context (user, profile, roles, permissions).
+ * Throws redirect if account is suspended or terminated.
+ */
+export async function getCurrentUserContext(): Promise<UserContext | null> {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) return null
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .single()
+
+  if (!profile) return null
+
+  // Enforce termination / suspension lifecycle checks
+  if (profile.status === 'terminated' || profile.status === 'suspended' || !profile.is_active) {
+    await supabase.auth.signOut()
+    redirect('/login?error=account_revoked')
+  }
+
+  const { data: userRoles } = await supabase
+    .from('user_roles')
+    .select('role')
+    .eq('user_id', user.id)
+
+  const roles = userRoles?.map((r) => r.role) ?? []
+
+  // Fetch permissions for all assigned roles
+  const { data: rolePerms } = await supabase
+    .from('role_permissions')
+    .select('permission_name')
+    .in('role', roles.length > 0 ? roles : ['employee'])
+
+  const permissions = Array.from(new Set(rolePerms?.map((p) => p.permission_name) ?? []))
+
+  return {
+    user: { id: user.id, email: user.email },
+    profile,
+    roles,
+    permissions,
+  }
+}
+
+/**
+ * Require authentication and active account status.
+ * Redirects to /login if not authenticated.
  */
 export async function requireAuth() {
-  const user = await getCurrentUser()
-  if (!user) {
+  const context = await getCurrentUserContext()
+  if (!context) {
     redirect('/login')
   }
-  return user
+  return context
 }
 
 /**
- * Require a specific role. Redirects to /unauthorized if the user
- * does not have the required role.
+ * Require a specific role. Strictly enforces role boundaries:
+ * - Admin does NOT have access to Tech Lead portal (/tech-lead)
+ * - CEO does NOT have access to Operations portal (/admin) unless assigned admin
+ * - Employee does NOT have access to management portals
+ * Redirects to /unauthorized if unauthorized.
  */
-export async function requireRole(requiredRole: AppRole) {
-  const user = await requireAuth()
-  const supabase = await createClient()
+export async function requireRole(requiredRole: AppRole): Promise<UserContext> {
+  const context = await requireAuth()
 
-  // Admin has access to everything
-  const { data: isAdmin } = await supabase.rpc('is_admin', { p_user_id: user.id })
-  if (isAdmin) return user
+  // Tech Lead is system superauthority with access to tech-lead and inspection
+  const isTechLead = context.roles.includes('tech_lead')
 
-  const { data: hasRole } = await supabase.rpc('has_role', {
-    p_user_id: user.id,
-    p_role: requiredRole,
-  })
+  // Check direct role assignment
+  const hasDirectRole = context.roles.includes(requiredRole)
 
-  if (!hasRole) {
-    redirect('/unauthorized')
+  if (hasDirectRole) {
+    return context
   }
 
-  return user
+  // Tech Lead can inspect other management portals if needed for system maintenance
+  if (isTechLead && requiredRole !== 'tech_lead') {
+    return context
+  }
+
+  // Cross-portal isolation: admin and ceo cannot access tech_lead portal
+  redirect('/unauthorized')
 }
 
 /**
- * Check if the current user has a specific role (no redirect).
+ * Require an explicit permission string.
+ * Redirects to /unauthorized if permission is absent.
+ */
+export async function requirePermission(permission: string): Promise<UserContext> {
+  const context = await requireAuth()
+
+  if (context.permissions.includes(permission) || context.roles.includes('tech_lead')) {
+    return context
+  }
+
+  redirect('/unauthorized')
+}
+
+/**
+ * Check if current user has a role (without redirect).
  */
 export async function checkRole(role: AppRole): Promise<boolean> {
-  const user = await getCurrentUser()
-  if (!user) return false
+  const context = await getCurrentUserContext()
+  if (!context) return false
+  return context.roles.includes(role)
+}
 
-  const supabase = await createClient()
-
-  // Admin has all roles
-  const { data: isAdmin } = await supabase.rpc('is_admin', { p_user_id: user.id })
-  if (isAdmin) return true
-
-  const { data: hasRole } = await supabase.rpc('has_role', {
-    p_user_id: user.id,
-    p_role: role,
-  })
-
-  return hasRole ?? false
+/**
+ * Check if current user has a permission (without redirect).
+ */
+export async function checkPermission(permission: string): Promise<boolean> {
+  const context = await getCurrentUserContext()
+  if (!context) return false
+  return context.permissions.includes(permission) || context.roles.includes('tech_lead')
 }

@@ -66,4 +66,7 @@ export type {
   Employee,
   AttendancePunch,
   LeaveRequest,
+  AuditLog,
+  Permission,
+  RolePermission,
 } from './database'

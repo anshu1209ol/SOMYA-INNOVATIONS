@@ -14,6 +14,8 @@ function LoginForm() {
   const [error, setError] = useState<string | null>(
     urlError === 'auth_callback_failed'
       ? 'Authentication failed. Please try again.'
+      : urlError === 'account_revoked'
+      ? 'Access Revoked: Your account has been suspended or terminated. Please contact system administration.'
       : urlError
   )
   const [loading, setLoading] = useState(false)

@@ -36,7 +36,6 @@ const PUBLIC_ROUTES = [
   '/verify-email',
   '/unauthorized',
   '/auth/callback',
-  '/attendance',
 ]
 
 /**
@@ -93,6 +92,13 @@ export async function proxy(request: NextRequest) {
 
   const { user, supabaseResponse } = await updateSession(request)
   const { pathname } = request.nextUrl
+
+  // Legacy attendance compatibility redirect
+  if (pathname === '/attendance' || pathname.startsWith('/attendance/')) {
+    const adminAttendanceUrl = request.nextUrl.clone()
+    adminAttendanceUrl.pathname = '/admin/attendance'
+    return NextResponse.redirect(adminAttendanceUrl, 307)
+  }
 
   // Protected routes: redirect to login if not authenticated
   if (isProtectedRoute(pathname) && !user) {
