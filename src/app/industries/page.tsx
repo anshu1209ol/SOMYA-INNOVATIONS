@@ -69,10 +69,10 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
       "Secure structured office networking with automated daily backup pipelines",
     ],
     relevantServices: [
-      { name: "IT Infrastructure", href: "/it-solutions#hardware" },
-      { name: "Business Dashboards", href: "/digital-solutions#business-dashboards" },
-      { name: "Hardware Procurement", href: "/services" },
-      { name: "Technical Support", href: "/it-solutions#support" },
+      { name: "IT Infrastructure", href: "/solutions/it-solutions" },
+      { name: "Business Dashboards", href: "/solutions/digital-solutions" },
+      { name: "Technology Products", href: "/products" },
+      { name: "Technical Support", href: "/solutions/it-solutions" },
     ],
     ctaLabel: "Discuss Business Solutions",
   },
@@ -94,10 +94,10 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
       "Pragmatic applied AI integrations (custom LLMs, document parsers, vector search)",
     ],
     relevantServices: [
-      { name: "Web Applications", href: "/digital-solutions#web-applications" },
-      { name: "Cloud Solutions", href: "/digital-solutions#cloud-solutions" },
-      { name: "AI Automation", href: "/ai-solutions#ai-automation" },
-      { name: "API Integration", href: "/digital-solutions#api-integration" },
+      { name: "Web Applications", href: "/solutions/digital-solutions" },
+      { name: "Cloud Solutions", href: "/solutions/digital-solutions" },
+      { name: "AI Automation", href: "/solutions/ai-automation" },
+      { name: "API Integration", href: "/solutions/digital-solutions" },
     ],
     ctaLabel: "Discuss Startup Requirements",
   },
@@ -120,9 +120,9 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
     ],
     relevantServices: [
       { name: "Technology Products", href: "/products" },
-      { name: "Networking Solutions", href: "/it-solutions#networking" },
-      { name: "CCTV & Security", href: "/it-solutions#security" },
-      { name: "Custom Software", href: "/digital-solutions#custom-software" },
+      { name: "Networking Solutions", href: "/solutions/it-solutions" },
+      { name: "CCTV & Security", href: "/solutions/it-solutions" },
+      { name: "Custom Software", href: "/solutions/digital-solutions" },
     ],
     ctaLabel: "Discuss Institutional Solutions",
   },
@@ -145,16 +145,16 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
     ],
     relevantServices: [
       { name: "Technology Products", href: "/products" },
-      { name: "Workflow Automation", href: "/ai-solutions" },
-      { name: "IT Infrastructure", href: "/it-solutions" },
-      { name: "Digital Solutions", href: "/digital-solutions" },
+      { name: "Workflow Automation", href: "/solutions/ai-automation" },
+      { name: "IT Infrastructure", href: "/solutions/it-solutions" },
+      { name: "Digital Solutions", href: "/solutions/digital-solutions" },
     ],
-    ctaLabel: "Discuss Corporate Solutions",
+    ctaLabel: "Discuss Corporate Strategy",
   },
   {
     id: "retail",
-    title: "Retail",
-    badge: "Stores & Multi-Outlet Chains",
+    title: "Retail & Multi-Store",
+    badge: "Stores & Showrooms",
     icon: ShoppingBag,
     environmentOverview:
       "Commercial retail stores, showrooms, and multi-location retail chains requiring uninterrupted checkout uptime, inventory synchronization, and facility security.",
@@ -169,10 +169,10 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
       "Commercial 4K IP security cameras with computer vision for customer density telemetry",
     ],
     relevantServices: [
-      { name: "Computer Accessories & POS", href: "/it-solutions#hardware" },
-      { name: "Computer Vision", href: "/ai-solutions#computer-vision" },
-      { name: "Business Dashboards", href: "/digital-solutions#business-dashboards" },
-      { name: "CCTV Technology", href: "/it-solutions#security" },
+      { name: "Computer Accessories & POS", href: "/solutions/it-solutions" },
+      { name: "Computer Vision", href: "/solutions/ai-automation" },
+      { name: "Business Dashboards", href: "/solutions/digital-solutions" },
+      { name: "CCTV Technology", href: "/solutions/it-solutions" },
     ],
     ctaLabel: "Discuss Retail Solutions",
   },
@@ -194,10 +194,10 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
       "Intelligent document processing extracting structured medical records from scanned forms",
     ],
     relevantServices: [
-      { name: "Document Intelligence", href: "/ai-solutions#document-intelligence" },
-      { name: "Electronics & UPS Backup", href: "/products?category=Electronics" },
-      { name: "Database Solutions", href: "/digital-solutions#database-solutions" },
-      { name: "Technical Support", href: "/it-solutions#support" },
+      { name: "Document Intelligence", href: "/solutions/ai-automation" },
+      { name: "Electronics & UPS Backup", href: "/products" },
+      { name: "Database Solutions", href: "/solutions/digital-solutions" },
+      { name: "Technical Support", href: "/solutions/it-solutions" },
     ],
     ctaLabel: "Discuss Healthcare Infrastructure",
   },
@@ -219,10 +219,10 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
       "Networked biometric access control terminals, RFID card gates, and automated visitor logs",
     ],
     relevantServices: [
-      { name: "Custom Software", href: "/digital-solutions#custom-software" },
-      { name: "AI Chatbots", href: "/ai-solutions#ai-chatbots" },
-      { name: "Access Control Systems", href: "/it-solutions#security" },
-      { name: "Website Development", href: "/digital-solutions#website-development" },
+      { name: "Custom Software", href: "/solutions/digital-solutions" },
+      { name: "AI Chatbots", href: "/solutions/ai-automation" },
+      { name: "Access Control Systems", href: "/solutions/it-solutions" },
+      { name: "Website Development", href: "/solutions/digital-solutions" },
     ],
     ctaLabel: "Discuss Real Estate Solutions",
   },
@@ -244,10 +244,10 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
       "Customized guest service applications and centralized operational telemetry dashboards",
     ],
     relevantServices: [
-      { name: "Wi-Fi Infrastructure", href: "/it-solutions#networking" },
-      { name: "Electronics & Commercial AV", href: "/products?category=Electronics" },
-      { name: "Web Applications", href: "/digital-solutions#web-applications" },
-      { name: "Networking Solutions", href: "/it-solutions#networking" },
+      { name: "Wi-Fi Infrastructure", href: "/solutions/it-solutions" },
+      { name: "Commercial AV Systems", href: "/products" },
+      { name: "Web Applications", href: "/solutions/digital-solutions" },
+      { name: "Networking Solutions", href: "/solutions/it-solutions" },
     ],
     ctaLabel: "Discuss Hospitality IT",
   },
@@ -269,10 +269,10 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
       "Custom dispatch and inventory dashboards integrating third-party carrier APIs and telematics",
     ],
     relevantServices: [
-      { name: "Computer Vision", href: "/ai-solutions#computer-vision" },
-      { name: "Office Technology & Scanners", href: "/products?category=Office+Technology" },
-      { name: "Business Dashboards", href: "/digital-solutions#business-dashboards" },
-      { name: "API Integration", href: "/digital-solutions#api-integration" },
+      { name: "Computer Vision", href: "/solutions/ai-automation" },
+      { name: "Office Technology & Scanners", href: "/products" },
+      { name: "Business Dashboards", href: "/solutions/digital-solutions" },
+      { name: "API Integration", href: "/solutions/digital-solutions" },
     ],
     ctaLabel: "Discuss Logistics Systems",
   },
@@ -294,10 +294,10 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
       "Custom agri-processing software tracking batch yields, grower payments, and dispatch lots",
     ],
     relevantServices: [
-      { name: "Security & Sensor Telemetry", href: "/it-solutions#security" },
-      { name: "Power Conditioning (UPS)", href: "/products?category=Electronics" },
-      { name: "Custom Software", href: "/digital-solutions#custom-software" },
-      { name: "Hardware Procurement", href: "/it-solutions#hardware" },
+      { name: "Security & Sensor Telemetry", href: "/solutions/it-solutions" },
+      { name: "Power Conditioning (UPS)", href: "/products" },
+      { name: "Custom Software", href: "/solutions/digital-solutions" },
+      { name: "Enterprise Hardware", href: "/solutions/it-solutions" },
     ],
     ctaLabel: "Discuss Agribusiness Systems",
   },
@@ -348,9 +348,9 @@ export default function IndustriesPage() {
                 <a
                   key={ind.id}
                   href={`#${ind.id}`}
-                  className="px-3.5 py-1.5 rounded-xl text-xs font-medium text-zinc-300 bg-zinc-900/60 border border-white/[0.08] hover:border-indigo-500/40 hover:text-white hover-elevate transition-all duration-200 flex items-center gap-2"
+                  className="px-3.5 py-1.5 rounded-xl text-xs font-medium text-zinc-300 bg-zinc-900/60 border border-white/[0.08] hover:border-[#641F2A]/60 hover:text-white hover-elevate transition-all duration-200 flex items-center gap-2"
                 >
-                  <Icon className="w-3.5 h-3.5 text-indigo-400" />
+                  <Icon className="w-3.5 h-3.5 text-[#68704A]" />
                   <span>{ind.title}</span>
                 </a>
               );
@@ -373,8 +373,8 @@ export default function IndustriesPage() {
         </div>
 
         {/* ─── TRANSPARENT CAPABILITY NOTICE ──────────────────────────── */}
-        <div className="mb-14 p-5 rounded-2xl bg-indigo-950/20 border border-indigo-500/20 flex items-start gap-4">
-          <Compass className="w-5 h-5 text-indigo-400 mt-0.5 shrink-0" />
+        <div className="mb-14 p-5 rounded-2xl bg-[#161614] border border-[#2A2A26] flex items-start gap-4">
+          <Compass className="w-5 h-5 text-[#68704A] mt-0.5 shrink-0" />
           <div className="text-xs text-zinc-400 leading-relaxed">
             <span className="font-semibold text-zinc-200 block mb-1">
               Sector Application Overview
@@ -397,12 +397,12 @@ export default function IndustriesPage() {
                 {/* Industry Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08] mb-8">
                   <div className="flex items-center gap-4">
-                    <div className="w-14 h-14 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:scale-105 group-hover:bg-indigo-500/20 transition-all">
-                      <Icon className="w-7 h-7" />
+                    <div className="w-14 h-14 rounded-2xl bg-[#641F2A]/15 border border-[#641F2A]/30 flex items-center justify-center text-[#F1EBDD] group-hover:scale-105 group-hover:bg-[#641F2A]/25 transition-all">
+                      <Icon className="w-7 h-7 text-[#641F2A]" />
                     </div>
                     <div>
                       <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] font-mono text-indigo-400 font-semibold uppercase tracking-wider">
+                        <span className="text-[10px] font-mono text-[#68704A] font-semibold uppercase tracking-wider">
                           Sector 0{index + 1}
                         </span>
                         <Badge variant="default" size="sm">
@@ -452,14 +452,14 @@ export default function IndustriesPage() {
 
                   {/* Column 2: Potential SOMYA Solutions */}
                   <div className="lg:col-span-5 p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-3">
-                    <div className="flex items-center gap-2 text-xs font-semibold text-indigo-400 uppercase tracking-wider">
-                      <CheckCircle className="w-4 h-4 text-indigo-400 shrink-0" />
+                    <div className="flex items-center gap-2 text-xs font-semibold text-[#68704A] uppercase tracking-wider">
+                      <CheckCircle className="w-4 h-4 text-[#68704A] shrink-0" />
                       <span>Potential SOMYA Solutions</span>
                     </div>
                     <ul className="space-y-3 pt-2">
                       {ind.solutions.map((sol) => (
                         <li key={sol} className="flex items-start gap-2.5 text-xs text-zinc-300 leading-relaxed">
-                          <CheckCircle className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                          <CheckCircle className="w-3.5 h-3.5 text-[#68704A] shrink-0 mt-0.5" />
                           <span>{sol}</span>
                         </li>
                       ))}
@@ -469,15 +469,15 @@ export default function IndustriesPage() {
                   {/* Column 3: Relevant Services & Products */}
                   <div className="lg:col-span-3 p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex flex-col justify-between space-y-3">
                     <div>
-                      <span className="text-xs font-semibold text-cyan-400 uppercase tracking-wider block mb-3">
-                        Relevant Services
+                      <span className="text-xs font-semibold text-[#E8DFCF] uppercase tracking-wider block mb-3">
+                        Relevant Capabilities
                       </span>
                       <div className="flex flex-wrap gap-2">
                         {ind.relevantServices.map((srv) => (
                           <Link
                             key={srv.name}
                             href={srv.href}
-                            className="px-2.5 py-1 rounded-lg text-xs font-medium text-zinc-300 bg-zinc-800/60 border border-zinc-700/60 hover:text-cyan-300 hover:border-cyan-500/40 hover:bg-cyan-950/20 transition-all"
+                            className="px-2.5 py-1 rounded-lg text-xs font-medium text-zinc-300 bg-zinc-800/60 border border-zinc-700/60 hover:text-white hover:border-[#641F2A]/60 hover:bg-[#641F2A]/20 transition-all"
                           >
                             {srv.name}
                           </Link>
@@ -488,7 +488,7 @@ export default function IndustriesPage() {
                     <div className="pt-4 border-t border-white/[0.06]">
                       <Link
                         href={`/request-quote?industry=${encodeURIComponent(ind.title)}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors"
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#641F2A] hover:text-[#E8DFCF] transition-colors"
                       >
                         <span>Inquire for {ind.title}</span>
                         <ArrowRight className="w-3 h-3" />
@@ -503,18 +503,17 @@ export default function IndustriesPage() {
 
         {/* ─── FINAL CALL TO ACTION ────────────────────────────────────── */}
         <section className="mt-20 pt-16 border-t border-white/[0.08]">
-          <div className="relative rounded-3xl overflow-hidden border border-white/[0.1] bg-gradient-to-br from-zinc-900/90 via-zinc-950 to-indigo-950/40 p-8 sm:p-14 text-center shadow-2xl">
-            <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
-            <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-indigo-500/15 blur-3xl pointer-events-none" />
+          <div className="relative rounded-3xl overflow-hidden border border-[#2A2A26] bg-[#161614] p-8 sm:p-14 text-center shadow-2xl">
+            <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none" />
 
             <div className="relative z-10 max-w-2xl mx-auto">
-              <Badge variant="accent" dot className="mb-4">
+              <Badge variant="burgundy" dot className="mb-4">
                 Tailored Engagement
               </Badge>
-              <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-4">
+              <h2 className="text-3xl sm:text-4xl font-serif text-[#F1EBDD] tracking-tight mb-4">
                 Discuss Your Requirement
               </h2>
-              <p className="text-sm sm:text-base text-zinc-400 leading-relaxed mb-8">
+              <p className="text-sm sm:text-base text-[#F1EBDD]/70 leading-relaxed mb-8 font-sans">
                 Every sector operates under specific workflow constraints, data compliance mandates, and equipment budgets.
                 Connect with our solutions engineers to review your operational environment and receive an itemized proposal.
               </p>
@@ -524,7 +523,7 @@ export default function IndustriesPage() {
                   href="/request-quote"
                   variant="primary"
                   size="md"
-                  className="w-full sm:w-auto shadow-[0_0_20px_rgba(99,102,241,0.3)]"
+                  className="w-full sm:w-auto"
                   icon={<ArrowRight className="w-4 h-4" />}
                 >
                   Discuss Your Requirement
@@ -539,18 +538,18 @@ export default function IndustriesPage() {
                 </ButtonLink>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/[0.06] flex flex-wrap items-center justify-center gap-6 text-xs text-zinc-500 font-mono">
+              <div className="mt-8 pt-6 border-t border-[#2A2A26] flex flex-wrap items-center justify-center gap-6 text-xs text-[#F1EBDD]/50 font-mono">
                 <span className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
-                  Vendor-Neutral Sourcing
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#641F2A]" />
+                  Verified Engineering
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-emerald-400" />
-                  Itemized Cost Transparency
+                  <CheckCircle className="w-3.5 h-3.5 text-[#68704A]" />
+                  Transparent Pricing
                 </span>
                 <span className="flex items-center gap-1.5">
-                  <CheckCircle className="w-3.5 h-3.5 text-cyan-400" />
-                  Dedicated Solutions Engineer
+                  <CheckCircle className="w-3.5 h-3.5 text-[#F1EBDD]/60" />
+                  Direct Technical Specialists
                 </span>
               </div>
             </div>

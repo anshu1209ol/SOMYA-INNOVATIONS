@@ -73,6 +73,9 @@ export function Footer() {
                 <img
                   src="/branding/logo-mark.png"
                   alt="SOMYA INNOVATIONS Logo"
+                  width={40}
+                  height={40}
+                  loading="lazy"
                   className="w-full h-full object-contain rounded-lg"
                 />
               </div>

@@ -189,6 +189,8 @@ export function Navbar() {
                   <img
                     src="/branding/logo-mark.png"
                     alt="SOMYA INNOVATIONS Logo"
+                    width={40}
+                    height={40}
                     className="w-full h-full object-contain rounded-lg"
                   />
                 </div>
@@ -451,6 +453,8 @@ export function Navbar() {
                   <img
                     src="/branding/logo-mark.png"
                     alt="SOMYA INNOVATIONS Logo"
+                    width={32}
+                    height={32}
                     className="w-full h-full object-contain rounded-md"
                   />
                 </div>

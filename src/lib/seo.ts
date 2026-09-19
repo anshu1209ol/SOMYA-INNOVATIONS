@@ -192,3 +192,41 @@ export function getArticleSchema({
     },
   };
 }
+
+/**
+ * Generates Schema.org JSON-LD for a SoftwareApplication / Product.
+ * Strictly verified metadata only — zero fabricated prices, reviews, ratings, or SKUs.
+ */
+export interface ProductSchemaOptions {
+  name: string;
+  description: string;
+  slug: string;
+  category: string;
+}
+
+export function getProductSchema({
+  name,
+  description,
+  slug,
+  category,
+}: ProductSchemaOptions) {
+  const canonicalUrl = `${COMPANY.siteUrl}/products/${slug}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name,
+    description,
+    applicationCategory: category.includes("AI")
+      ? "ArtificialIntelligenceApplication"
+      : "BusinessApplication",
+    operatingSystem: "Cloud, Web, Linux, Windows, macOS",
+    url: canonicalUrl,
+    provider: {
+      "@type": "Organization",
+      name: COMPANY.name,
+      url: `${COMPANY.siteUrl}/`,
+    },
+  };
+}
+

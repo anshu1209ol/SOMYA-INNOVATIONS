@@ -25,7 +25,7 @@ export function CTABanner({
     <section className="py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative rounded-3xl overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-zinc-900 to-cyan-500/10" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#641F2A]/15 via-[#11110F] to-[#68704A]/15" />
           <div className="absolute inset-0 bg-grid opacity-30" />
           <div className="absolute inset-[1px] rounded-3xl border border-zinc-700/50" />
           <div className="relative px-8 py-16 md:px-16 md:py-20 text-center">

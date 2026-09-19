@@ -59,7 +59,7 @@ const SECTIONS: LegalSection[] = [
         <ul className="list-disc pl-5 space-y-2 text-zinc-300">
           <li>
             <strong className="text-zinc-200">Inspection &amp; Transit Damage Notice:</strong> Enterprise buyers must inspect shipments upon delivery. Any physical damage sustained during transit or discrepancies against the invoice must be reported in writing within{" "}
-            <span className="font-mono text-indigo-300">[INSPECTION TIMEFRAME: E.G. 48 TO 72 HOURS]</span> of receipt.
+            <span className="font-mono text-[#E8DFCF]">[INSPECTION TIMEFRAME: E.G. 48 TO 72 HOURS]</span> of receipt.
           </li>
           <li>
             <strong className="text-zinc-200">Defective on Arrival (DOA):</strong> Units determined to be Dead-on-Arrival upon certified installation will be prioritized for warranty replacement or RMA service per manufacturer policy.
@@ -125,7 +125,7 @@ const SECTIONS: LegalSection[] = [
           </li>
           <li>
             <strong className="text-zinc-200">Processing Window:</strong> Following physical inspection and approval, credit memos will be initiated within{" "}
-            <span className="font-mono text-indigo-300">[TIMEFRAME: E.G. 7 TO 14 BUSINESS DAYS]</span>, subject to commercial banking settlement cycles.
+            <span className="font-mono text-[#E8DFCF]">[TIMEFRAME: E.G. 7 TO 14 BUSINESS DAYS]</span>, subject to commercial banking settlement cycles.
           </li>
         </ul>
       </>

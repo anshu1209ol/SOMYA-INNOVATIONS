@@ -54,6 +54,10 @@ export default function HomePage() {
           <img
             src="/images/hero-workspace.jpg"
             alt="Professional executive office workspace with city skyline view"
+            width={1200}
+            height={800}
+            loading="eager"
+            fetchPriority="high"
             className="w-full h-full object-cover"
           />
           {/* Dark overlay to blend edges */}
@@ -184,6 +188,9 @@ export default function HomePage() {
           <img
             src="/images/hero-workspace.jpg"
             alt="Professional executive office workspace"
+            width={800}
+            height={400}
+            loading="lazy"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#11110F] via-[#11110F]/40 to-transparent" />
@@ -238,7 +245,7 @@ export default function HomePage() {
               </div>
               <div className="pt-4 border-t border-black/[0.08]">
                 <Link
-                  href="/ai-solutions"
+                  href="/solutions/ai-automation"
                   className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#641F2A] hover:text-[#45151D] transition-colors"
                 >
                   <span>Explore AI Capabilities</span>
@@ -268,7 +275,7 @@ export default function HomePage() {
               </div>
               <div className="pt-4 border-t border-black/[0.08]">
                 <Link
-                  href="/it-solutions"
+                  href="/solutions/it-solutions"
                   className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#68704A] hover:text-[#4D5437] transition-colors"
                 >
                   <span>Explore IT Solutions</span>
@@ -298,7 +305,7 @@ export default function HomePage() {
               </div>
               <div className="pt-4 border-t border-black/[0.08]">
                 <Link
-                  href="/digital-solutions"
+                  href="/solutions/digital-solutions"
                   className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#641F2A] hover:text-[#45151D] transition-colors"
                 >
                   <span>Explore Digital Solutions</span>
@@ -416,7 +423,7 @@ export default function HomePage() {
               </p>
             </div>
             <div>
-              <ButtonLink href="/ai-solutions" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>
+              <ButtonLink href="/solutions/ai-automation" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>
                 Explore AI Capabilities
               </ButtonLink>
             </div>
@@ -500,7 +507,7 @@ export default function HomePage() {
               </p>
             </div>
             <div>
-              <ButtonLink href="/it-solutions" variant="secondary-dark" icon={<ArrowRight className="w-4 h-4" />}>
+              <ButtonLink href="/solutions/it-solutions" variant="secondary-dark" icon={<ArrowRight className="w-4 h-4" />}>
                 Explore IT Infrastructure
               </ButtonLink>
             </div>
@@ -584,7 +591,7 @@ export default function HomePage() {
               </p>
             </div>
             <div>
-              <ButtonLink href="/digital-solutions" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>
+              <ButtonLink href="/solutions/digital-solutions" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>
                 Explore Digital Solutions
               </ButtonLink>
             </div>

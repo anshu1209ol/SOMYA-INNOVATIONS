@@ -5,104 +5,107 @@ import { getResources } from "@/lib/resources";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = COMPANY.siteUrl;
-  const currentDate = new Date().toISOString();
+  
+  // Stable content release dates to prevent false lastmod churn on every deployment
+  const staticContentDate = "2025-03-15T00:00:00.000Z";
+  const productContentDate = "2025-03-10T00:00:00.000Z";
 
   // Canonical Indexable Public URLs per Section 9
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "weekly",
       priority: 1.0,
     },
     {
       url: `${baseUrl}/about`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/solutions/ai-automation`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/solutions/it-solutions`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/solutions/digital-solutions`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/products`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/industries`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/work`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/resources`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
       url: `${baseUrl}/careers`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${baseUrl}/contact`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${baseUrl}/request-quote`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     // Legal & Compliance Pages
     {
       url: `${baseUrl}/privacy-policy`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${baseUrl}/terms`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${baseUrl}/refund-policy`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${baseUrl}/cookie-policy`,
-      lastModified: currentDate,
+      lastModified: staticContentDate,
       changeFrequency: "yearly",
       priority: 0.3,
     },
@@ -114,7 +117,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .filter((product) => !product.isDemoPlaceholder)
     .map((product) => ({
       url: `${baseUrl}/products/${product.slug}`,
-      lastModified: currentDate,
+      lastModified: productContentDate,
       changeFrequency: "weekly",
       priority: 0.8,
     }));
@@ -125,7 +128,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     url: `${baseUrl}/resources/${article.slug}`,
     lastModified: article.publishedAt
       ? new Date(article.publishedAt).toISOString()
-      : currentDate,
+      : staticContentDate,
     changeFrequency: "monthly",
     priority: 0.8,
   }));

@@ -69,6 +69,28 @@ function isProtectedRoute(pathname: string): boolean {
 }
 
 export async function proxy(request: NextRequest) {
+  // ── Canonical Domain & HTTPS Enforcement ──
+  const host = request.headers.get("host") || "";
+  const isLocal = host.includes("localhost") || host.includes("127.0.0.1");
+
+  if (!isLocal) {
+    // Redirect non-www (somyainnovations.in) to canonical www (www.somyainnovations.in)
+    if (host === "somyainnovations.in") {
+      const canonicalUrl = request.nextUrl.clone();
+      canonicalUrl.host = "www.somyainnovations.in";
+      canonicalUrl.protocol = "https:";
+      return NextResponse.redirect(canonicalUrl, 301);
+    }
+
+    // Redirect HTTP to HTTPS in production
+    const proto = request.headers.get("x-forwarded-proto");
+    if (proto === "http") {
+      const httpsUrl = request.nextUrl.clone();
+      httpsUrl.protocol = "https:";
+      return NextResponse.redirect(httpsUrl, 301);
+    }
+  }
+
   const { user, supabaseResponse } = await updateSession(request)
   const { pathname } = request.nextUrl
 

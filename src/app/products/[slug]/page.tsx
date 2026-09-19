@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createMetadata, getBreadcrumbSchema } from "@/lib/seo";
+import { createMetadata, getBreadcrumbSchema, getProductSchema } from "@/lib/seo";
 import {
   getProductBySlug,
   getProducts,
@@ -101,11 +101,22 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     { name: product.name, url: `/products/${product.slug}` },
   ]);
 
+  const productSchema = getProductSchema({
+    name: product.name,
+    description: product.shortDescription,
+    slug: product.slug,
+    category: product.category,
+  });
+
   return (
     <div className="py-12 sm:py-16 lg:py-24 bg-[#11110F] text-[#F1EBDD]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}

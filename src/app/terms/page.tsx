@@ -131,7 +131,7 @@ const SECTIONS: LegalSection[] = [
         </p>
         <p>
           Any legal action, suit, arbitration, or judicial proceeding arising out of or relating to these Terms shall be subject to the exclusive jurisdiction of the competent courts located in{" "}
-          <span className="font-mono text-indigo-300">[DESIGNATED CITY / DISTRICT, JURISDICTION]</span>.
+          <span className="font-mono text-[#E8DFCF]">[DESIGNATED CITY / DISTRICT, JURISDICTION]</span>.
         </p>
       </>
     ),

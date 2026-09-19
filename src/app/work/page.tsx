@@ -169,7 +169,7 @@ export default async function WorkPage() {
                   >
                     Discuss Your Project
                   </ButtonLink>
-                  <ButtonLink href="/ai-solutions" variant="secondary" size="md">
+                  <ButtonLink href="/solutions/ai-automation" variant="secondary" size="md">
                     Explore Capabilities
                   </ButtonLink>
                 </div>

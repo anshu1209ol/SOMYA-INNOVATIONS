@@ -469,7 +469,7 @@ export default function ServicesPage() {
             </div>
             <div className="shrink-0">
               <ButtonLink
-                href="/ai-solutions"
+                href="/solutions/ai-automation"
                 variant="secondary"
                 size="sm"
                 icon={<ArrowRight className="w-3.5 h-3.5" />}
@@ -541,7 +541,7 @@ export default function ServicesPage() {
             </div>
             <div className="shrink-0">
               <ButtonLink
-                href="/it-solutions"
+                href="/solutions/it-solutions"
                 variant="secondary"
                 size="sm"
                 icon={<ArrowRight className="w-3.5 h-3.5" />}
@@ -613,7 +613,7 @@ export default function ServicesPage() {
             </div>
             <div className="shrink-0">
               <ButtonLink
-                href="/digital-solutions"
+                href="/solutions/digital-solutions"
                 variant="secondary"
                 size="sm"
                 icon={<ArrowRight className="w-3.5 h-3.5" />}

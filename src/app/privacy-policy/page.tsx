@@ -140,7 +140,7 @@ const SECTIONS: LegalSection[] = [
         </ul>
         <p>
           To exercise any of these rights, submit a written inquiry to{" "}
-          <code className="text-indigo-300 font-mono bg-white/[0.04] px-1.5 py-0.5 rounded">[GRIEVANCE EMAIL ADDRESS]</code>.
+          <code className="text-[#E8DFCF] font-mono bg-white/[0.04] px-1.5 py-0.5 rounded">[GRIEVANCE EMAIL ADDRESS]</code>.
         </p>
       </>
     ),

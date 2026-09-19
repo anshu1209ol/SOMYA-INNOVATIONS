@@ -79,7 +79,7 @@ export default function AboutPage() {
           </Text>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <ButtonLink href="/ai-solutions" variant="primary" size="md" icon={<ArrowRight className="w-4 h-4" />}>
+            <ButtonLink href="/solutions/ai-automation" variant="primary" size="md" icon={<ArrowRight className="w-4 h-4" />}>
               Explore Capabilities
             </ButtonLink>
             <ButtonLink href="/request-quote" variant="secondary-dark" size="md">
@@ -190,7 +190,7 @@ export default function AboutPage() {
               <div className="pt-4 border-t border-black/[0.08] flex items-center justify-between">
                 <span className="text-xs font-mono text-[#11110F]/60">Machine Learning • Vision • Automation</span>
                 <Link
-                  href="/ai-solutions"
+                  href="/solutions/ai-automation"
                   className="text-xs font-bold uppercase tracking-wider text-[#641F2A] hover:text-[#45151D] inline-flex items-center gap-1"
                 >
                   <span>Learn more</span>
@@ -219,7 +219,7 @@ export default function AboutPage() {
               <div className="pt-4 border-t border-black/[0.08] flex items-center justify-between">
                 <span className="text-xs font-mono text-[#11110F]/60">Hardware • Networks • Cyber Defense</span>
                 <Link
-                  href="/it-solutions"
+                  href="/solutions/it-solutions"
                   className="text-xs font-bold uppercase tracking-wider text-[#68704A] hover:text-[#4D5437] inline-flex items-center gap-1"
                 >
                   <span>Learn more</span>
@@ -248,7 +248,7 @@ export default function AboutPage() {
               <div className="pt-4 border-t border-black/[0.08] flex items-center justify-between">
                 <span className="text-xs font-mono text-[#11110F]/60">Web Platforms • ERP • Cloud Apps</span>
                 <Link
-                  href="/digital-solutions"
+                  href="/solutions/digital-solutions"
                   className="text-xs font-bold uppercase tracking-wider text-[#641F2A] hover:text-[#45151D] inline-flex items-center gap-1"
                 >
                   <span>Learn more</span>

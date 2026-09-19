@@ -70,6 +70,58 @@ function getCategoryBadgeVariant(category: ResourceCategory): "burgundy" | "oliv
   }
 }
 
+interface RelevantCapability {
+  solutionTitle: string;
+  solutionHref: string;
+  solutionDesc: string;
+  productTitle: string;
+  productHref: string;
+  productDesc: string;
+}
+
+function getCategoryRelevantSolutions(category: ResourceCategory): RelevantCapability {
+  switch (category) {
+    case "AI":
+      return {
+        solutionTitle: "AI & Automation Solutions",
+        solutionHref: "/solutions/ai-automation",
+        solutionDesc: "Practical applied machine learning, computer vision inspection, and autonomous workflow pipelines.",
+        productTitle: "Somya Enterprise AI Copilot",
+        productHref: "/products/somya-enterprise-ai-copilot",
+        productDesc: "Context-aware enterprise AI with private knowledge RAG and zero data training exposure.",
+      };
+    case "IT":
+    case "Cybersecurity":
+      return {
+        solutionTitle: "IT Solutions & Infrastructure",
+        solutionHref: "/solutions/it-solutions",
+        solutionDesc: "Enterprise networking, cybersecurity defenses, server hardware, and SLA-governed support.",
+        productTitle: "Somya Zero-Trust Access Gateway",
+        productHref: "/products/somya-zero-trust-access-gateway",
+        productDesc: "Identity-verified network perimeter security with cryptographic device authorization.",
+      };
+    case "Cloud":
+    case "Digital Transformation":
+      return {
+        solutionTitle: "Digital Solutions & Platforms",
+        solutionHref: "/solutions/digital-solutions",
+        solutionDesc: "Custom web applications, cloud architectures, database engineering, and executive dashboards.",
+        productTitle: "Somya Workflow Orchestrator",
+        productHref: "/products/somya-workflow-orchestrator",
+        productDesc: "Event-driven integration engine orchestrating cross-system business logic and automated tasks.",
+      };
+    default:
+      return {
+        solutionTitle: "Enterprise IT Solutions",
+        solutionHref: "/solutions/it-solutions",
+        solutionDesc: "Hardware architectures, networking systems, and workplace compute platforms.",
+        productTitle: "Technology Products Directory",
+        productHref: "/products",
+        productDesc: "Explore verified enterprise servers, workstation nodes, and commercial software licensing.",
+      };
+  }
+}
+
 export default async function ArticleDetailPage({ params }: ArticlePageProps) {
   const { slug } = await params;
   const article = await getArticleBySlug(slug);
@@ -298,6 +350,70 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
             </div>
           </section>
         )}
+
+        {/* ─── RELEVANT SOLUTIONS & PRODUCTS SECTION ─────────────────── */}
+        {(() => {
+          const relCap = getCategoryRelevantSolutions(article.category);
+          return (
+            <section className="pt-12 border-t border-[#2A2A26] mb-16">
+              <div className="mb-6">
+                <Badge variant="olive" dot className="mb-2">
+                  Implementation Pathways
+                </Badge>
+                <h3 className="text-xl sm:text-2xl font-serif text-[#F1EBDD] tracking-tight">
+                  Relevant Solutions &amp; Product Offerings
+                </h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-sans">
+                <div className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] hover:border-[#68704A]/50 transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono text-[#68704A] font-semibold uppercase tracking-wider block mb-2">
+                      Solution Capability
+                    </span>
+                    <h4 className="text-base font-serif text-[#F1EBDD] mb-2">
+                      <Link href={relCap.solutionHref} className="hover:text-[#E8DFCF] transition-colors">
+                        {relCap.solutionTitle}
+                      </Link>
+                    </h4>
+                    <p className="text-xs text-[#F1EBDD]/70 leading-relaxed mb-4">
+                      {relCap.solutionDesc}
+                    </p>
+                  </div>
+                  <Link
+                    href={relCap.solutionHref}
+                    className="text-xs font-semibold text-[#68704A] hover:text-[#E8DFCF] inline-flex items-center gap-1.5 transition-colors"
+                  >
+                    <span>Explore Solution</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+
+                <div className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] hover:border-[#641F2A]/50 transition-all duration-300 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-mono text-[#641F2A] font-semibold uppercase tracking-wider block mb-2">
+                      Enterprise Product
+                    </span>
+                    <h4 className="text-base font-serif text-[#F1EBDD] mb-2">
+                      <Link href={relCap.productHref} className="hover:text-[#E8DFCF] transition-colors">
+                        {relCap.productTitle}
+                      </Link>
+                    </h4>
+                    <p className="text-xs text-[#F1EBDD]/70 leading-relaxed mb-4">
+                      {relCap.productDesc}
+                    </p>
+                  </div>
+                  <Link
+                    href={relCap.productHref}
+                    className="text-xs font-semibold text-[#641F2A] hover:text-[#E8DFCF] inline-flex items-center gap-1.5 transition-colors"
+                  >
+                    <span>View Product</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </section>
+          );
+        })()}
 
         {/* ─── TECHNICAL DISCOVERY CTA CARD ───────────────────────────── */}
         <section className="p-8 sm:p-12 rounded-3xl bg-[#161614] border border-[#2A2A26] text-center space-y-6">

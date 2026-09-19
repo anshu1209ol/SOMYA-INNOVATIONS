@@ -68,19 +68,19 @@ const SECTIONS: LegalSection[] = [
             </thead>
             <tbody className="divide-y divide-white/[0.06] text-zinc-400">
               <tr>
-                <td className="p-3 text-indigo-300 font-semibold">_somya_session</td>
+                <td className="p-3 text-[#E8DFCF] font-semibold">_somya_session</td>
                 <td className="p-3">Strictly Necessary</td>
                 <td className="p-3">First Party</td>
                 <td className="p-3">Maintains stateful interaction across form stages. Session expiry.</td>
               </tr>
               <tr>
-                <td className="p-3 text-indigo-300 font-semibold">_somya_csrf</td>
+                <td className="p-3 text-[#E8DFCF] font-semibold">_somya_csrf</td>
                 <td className="p-3">Security</td>
                 <td className="p-3">First Party</td>
                 <td className="p-3">Cross-Site Request Forgery mitigation on API endpoints. Session expiry.</td>
               </tr>
               <tr>
-                <td className="p-3 text-indigo-300 font-semibold">[TELEMETRY COOKIE]</td>
+                <td className="p-3 text-[#E8DFCF] font-semibold">[TELEMETRY COOKIE]</td>
                 <td className="p-3">Analytics</td>
                 <td className="p-3">[PROVIDER NAME]</td>
                 <td className="p-3">[Aggregated traffic analysis and error telemetry. Expiry: 12 months].</td>

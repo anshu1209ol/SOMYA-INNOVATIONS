@@ -48,8 +48,37 @@ export function LegalPageLayout({
     }
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.somyainnovations.in/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Legal",
+        item: "https://www.somyainnovations.in/terms",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: title,
+        item: `https://www.somyainnovations.in${activeRoute}`,
+      },
+    ],
+  };
+
   return (
     <div className="py-12 sm:py-16 lg:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <Breadcrumbs
@@ -66,7 +95,7 @@ export function LegalPageLayout({
               {documentType}
             </Badge>
             <div className="flex items-center gap-2 text-xs font-mono text-zinc-500">
-              <Clock className="w-3.5 h-3.5 text-indigo-400" />
+              <Clock className="w-3.5 h-3.5 text-[#68704A]" />
               <span>Last Updated: {lastUpdatedPlaceholder}</span>
             </div>
           </div>
@@ -113,7 +142,7 @@ export function LegalPageLayout({
             <div className="p-6 rounded-3xl bg-zinc-900/50 border border-white/[0.08] backdrop-blur-md">
               <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-white/[0.06]">
                 <span className="text-xs font-semibold uppercase tracking-wider text-zinc-300 flex items-center gap-2">
-                  <FileText className="w-3.5 h-3.5 text-indigo-400" />
+                  <FileText className="w-3.5 h-3.5 text-[#68704A]" />
                   Table of Contents
                 </span>
                 <button
@@ -157,13 +186,13 @@ export function LegalPageLayout({
                         href={link.href}
                         className={`flex items-center justify-between p-2 rounded-xl transition-all ${
                           isActive
-                            ? "bg-indigo-500/10 text-indigo-300 font-semibold border border-indigo-500/20"
+                            ? "bg-[#641F2A]/15 text-[#E8DFCF] font-semibold border border-[#641F2A]/30"
                             : "text-zinc-400 hover:text-white hover:bg-white/[0.02]"
                         }`}
                       >
                         <span>{link.label}</span>
                         {isActive ? (
-                          <span className="w-1.5 h-1.5 rounded-full bg-indigo-400" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#641F2A]" />
                         ) : (
                           <ArrowRight className="w-3 h-3 text-zinc-600" />
                         )}
@@ -184,7 +213,7 @@ export function LegalPageLayout({
                 className="scroll-mt-28 p-6 sm:p-8 rounded-3xl bg-zinc-900/40 border border-white/[0.08] hover:border-white/[0.12] transition-colors"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <span className="text-xs font-mono font-bold text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-0.5 rounded-md">
+                  <span className="text-xs font-mono font-bold text-[#C8C2B3] bg-white/[0.04] border border-white/[0.08] px-2.5 py-0.5 rounded-md">
                     {(idx + 1).toString().padStart(2, "0")}
                   </span>
                   <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
@@ -199,7 +228,7 @@ export function LegalPageLayout({
             ))}
 
             {/* ─── OFFICIAL LEGAL CONTACT PLACEHOLDER ──────────────────── */}
-            <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-zinc-900 via-zinc-950 to-indigo-950/40 border border-white/[0.1] space-y-4">
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#161614] border border-[#2A2A26] space-y-4">
               <div className="flex items-center gap-2">
                 <Badge variant="accent" size="sm">
                   Contact Information Placeholder
@@ -217,7 +246,7 @@ export function LegalPageLayout({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 font-mono text-xs">
                 <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
                   <span className="text-zinc-500 flex items-center gap-1.5">
-                    <Mail className="w-3.5 h-3.5 text-indigo-400" />
+                    <Mail className="w-3.5 h-3.5 text-[#68704A]" />
                     Legal / Grievance Email:
                   </span>
                   <span className="text-zinc-200 font-semibold block">
@@ -227,7 +256,7 @@ export function LegalPageLayout({
 
                 <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/[0.06] space-y-1">
                   <span className="text-zinc-500 flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                    <MapPin className="w-3.5 h-3.5 text-[#641F2A]" />
                     Registered Legal Entity:
                   </span>
                   <span className="text-zinc-200 font-semibold block">
@@ -238,7 +267,7 @@ export function LegalPageLayout({
 
               <div className="pt-2 flex items-center justify-between text-[11px] text-zinc-500 font-mono border-t border-white/[0.06]">
                 <span>Document Reference: SOMYA-LEGAL-{documentType.toUpperCase().replace(/\s+/g, "-")}</span>
-                <Link href="/contact" className="text-indigo-400 hover:text-indigo-300 flex items-center gap-1">
+                <Link href="/contact" className="text-[#E8DFCF] hover:text-white flex items-center gap-1">
                   <span>General Contact</span>
                   <ExternalLink className="w-3 h-3" />
                 </Link>
