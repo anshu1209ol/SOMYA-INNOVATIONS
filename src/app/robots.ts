@@ -31,6 +31,5 @@ export default function robots(): MetadataRoute.Robots {
       },
     ],
     sitemap: `${COMPANY.siteUrl}/sitemap.xml`,
-    host: COMPANY.siteUrl,
   };
 }
