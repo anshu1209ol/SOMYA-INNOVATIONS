@@ -506,6 +506,46 @@ export interface QuoteRequest {
   created_at: string
 }
 
+export interface Employee {
+  id: string
+  user_id?: string | null
+  name: string
+  role: string
+  dept: string
+  status: 'Present' | 'Remote' | 'Late' | 'On Leave' | 'Absent'
+  check_in?: string | null
+  check_out?: string | null
+  hours?: string | null
+  location?: string
+  avatar?: string | null
+  created_at?: string
+  updated_at?: string
+}
+
+export interface AttendancePunch {
+  id: string
+  employee_id: string
+  punch_in: string
+  punch_out?: string | null
+  duration?: string | null
+  status: 'active' | 'completed'
+  created_at?: string
+}
+
+export interface LeaveRequest {
+  id: string
+  employee_id?: string | null
+  employee_name: string
+  dept: string
+  dates: string
+  reason: string
+  type: string
+  status: 'Pending' | 'Approved' | 'Rejected'
+  actioned_by?: string | null
+  created_at?: string
+  updated_at?: string
+}
+
 
 // ─── Supabase Database Type ────────────────────────────────────────────────
 
@@ -519,6 +559,21 @@ type TableDef<Row, Insert = Partial<Row>, Update = Partial<Row>> = {
 export type Database = {
   public: {
     Tables: {
+      employees: TableDef<
+        Employee,
+        Omit<Employee, 'created_at' | 'updated_at'> & { created_at?: string; updated_at?: string },
+        Partial<Omit<Employee, 'id'>>
+      >
+      attendance_punches: TableDef<
+        AttendancePunch,
+        Omit<AttendancePunch, 'id' | 'created_at'> & { id?: string; created_at?: string },
+        Partial<Omit<AttendancePunch, 'id'>>
+      >
+      leave_requests: TableDef<
+        LeaveRequest,
+        Omit<LeaveRequest, 'id' | 'created_at' | 'updated_at'> & { id?: string; created_at?: string; updated_at?: string },
+        Partial<Omit<LeaveRequest, 'id'>>
+      >
       profiles: TableDef<
         Profile,
         Omit<Profile, 'created_at' | 'updated_at'> & { created_at?: string; updated_at?: string },

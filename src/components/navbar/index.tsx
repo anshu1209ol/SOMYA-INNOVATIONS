@@ -546,6 +546,24 @@ export function Navbar() {
                   </Link>
                 );
               })}
+
+              <div className="pt-2 pb-1">
+                <span className="px-3.5 text-[10px] font-mono tracking-wider uppercase text-[#C8C2B3]/70 font-semibold">
+                  Enterprise Portals
+                </span>
+              </div>
+
+              <Link
+                href="/attendance"
+                onClick={() => setIsMobileOpen(false)}
+                className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 text-[#D4E0A5] bg-[#68704A]/10 border border-[#68704A]/30 hover:bg-[#68704A]/20"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-[#68704A]" />
+                  <span>Workforce & Attendance</span>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-[#D4E0A5]" />
+              </Link>
             </nav>
           </div>
 

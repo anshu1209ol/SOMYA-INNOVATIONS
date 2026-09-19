@@ -36,6 +36,7 @@ const PUBLIC_ROUTES = [
   '/verify-email',
   '/unauthorized',
   '/auth/callback',
+  '/attendance',
 ]
 
 /**

@@ -155,6 +155,14 @@ export default function AdminPortalPage() {
               <span>Tech Lead Console</span>
             </Link>
 
+            <Link
+              href="/attendance"
+              className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#F1EBDD]/80 hover:text-[#F1EBDD] hover:bg-[#1B1B18] transition-colors"
+            >
+              <Users className="w-4 h-4 text-[#D4AF73]" />
+              <span>Workforce & Attendance</span>
+            </Link>
+
             <a
               href="#pipeline"
               className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-[#F1EBDD]/60 hover:text-[#F1EBDD] hover:bg-[#1B1B18] transition-colors"
@@ -271,6 +279,33 @@ export default function AdminPortalPage() {
               </div>
             );
           })}
+        </div>
+
+        {/* ─── WORKFORCE ATTENDANCE MODULE CALLOUT ──────────────────────── */}
+        <div className="p-6 rounded-2xl bg-[#11110F] text-[#F1EBDD] border border-[#2A2A26] shadow-md mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#641F2A]/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="flex items-start gap-4">
+            <div className="w-12 h-12 rounded-xl bg-[#641F2A]/30 border border-[#641F2A]/50 flex items-center justify-center text-[#F1EBDD] shrink-0">
+              <Users className="w-6 h-6 text-[#D4AF73]" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-xs font-mono uppercase tracking-wider text-[#D4AF73]">Active Subsystem</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#68704A] animate-pulse" />
+              </div>
+              <h3 className="text-lg font-bold tracking-tight text-[#F1EBDD]">Workforce & Biometric Shift Attendance Portal</h3>
+              <p className="text-xs text-[#C8C2B3]/70 mt-1 max-w-xl">
+                Real-time shift clock-in registers, automated telemetry metrics, and leave request approval queues for enterprise workforce governance.
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/attendance"
+            className="px-5 py-3 rounded-xl text-xs font-semibold bg-[#641F2A] hover:bg-[#7D2836] text-[#F1EBDD] shadow-[0_4px_16px_rgba(100,31,42,0.4)] transition-all flex items-center gap-2 shrink-0 self-start md:self-auto"
+          >
+            <span>Launch Attendance Portal</span>
+            <ArrowUpRight className="w-4 h-4" />
+          </Link>
         </div>
 
         {/* ─── REQUISITION INBOX & PIPELINE TABLE ─────────────────────── */}

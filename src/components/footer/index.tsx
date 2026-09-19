@@ -197,6 +197,14 @@ export function Footer() {
                     Tech Lead System
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/attendance"
+                    className="text-xs font-mono text-[#A2AD7B] hover:text-[#F1EBDD] transition-colors"
+                  >
+                    Workforce Attendance
+                  </Link>
+                </li>
               </ul>
             </nav>
           </div>

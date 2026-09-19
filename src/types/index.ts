@@ -63,4 +63,7 @@ export type {
   CompanySetting,
   ContactSubmission,
   QuoteRequest,
+  Employee,
+  AttendancePunch,
+  LeaveRequest,
 } from './database'
