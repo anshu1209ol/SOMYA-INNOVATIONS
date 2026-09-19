@@ -108,14 +108,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Dynamic Public Products
+  // Dynamic Public Products (only published, non-placeholder records)
   const products = await getProducts();
-  const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
-    url: `${baseUrl}/products/${product.slug}`,
-    lastModified: currentDate,
-    changeFrequency: "weekly",
-    priority: 0.8,
-  }));
+  const productRoutes: MetadataRoute.Sitemap = products
+    .filter((product) => !product.isDemoPlaceholder)
+    .map((product) => ({
+      url: `${baseUrl}/products/${product.slug}`,
+      lastModified: currentDate,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    }));
 
   // Dynamic Public Resources
   const articles = await getResources();
