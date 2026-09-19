@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, getArticleSchema, getBreadcrumbSchema } from "@/lib/seo";
 import {
   getArticleBySlug,
   getResources,
@@ -81,8 +81,30 @@ export default async function ArticleDetailPage({ params }: ArticlePageProps) {
   const relatedArticles = await getRelatedArticles(article.id, article.category, 3);
   const badgeVariant = getCategoryBadgeVariant(article.category);
 
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Resources", url: "/resources" },
+    { name: article.title, url: `/resources/${article.slug}` },
+  ]);
+
+  const articleSchema = getArticleSchema({
+    headline: article.title,
+    description: article.excerpt,
+    url: `/resources/${article.slug}`,
+    datePublished: article.publishedAt,
+    authorName: article.author.name,
+  });
+
   return (
     <div className="bg-[#11110F] text-[#F1EBDD] min-h-screen py-12 sm:py-16 lg:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <Breadcrumbs

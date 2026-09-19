@@ -20,12 +20,12 @@ import {
 } from "lucide-react";
 import { getActiveJobListings } from "@/lib/careers";
 import { CareersClient } from "./CareersClient";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, getBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "Careers & Opportunities | Build the Future with SOMYA",
+  title: "Careers at SOMYA INNOVATIONS | Technology Opportunities",
   description:
-    "Explore engineering and technology careers at SOMYA INNOVATIONS. We value pragmatic problem solving, continuous technical learning, and real-world technology solutions.",
+    "Explore career opportunities at SOMYA INNOVATIONS and join a team working across AI, IT and digital technology.",
   path: "/careers",
 });
 
@@ -90,9 +90,17 @@ const WHY_WORK_PILLARS = [
 
 export default async function CareersPage() {
   const activeJobs = await getActiveJobListings();
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Careers", url: "/careers" },
+  ]);
 
   return (
     <div className="bg-[#11110F] text-[#F1EBDD] min-h-screen py-12 sm:py-16 lg:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <Breadcrumbs items={[{ label: "Careers" }]} />
@@ -100,14 +108,16 @@ export default async function CareersPage() {
         {/* ─── HERO SECTION ────────────────────────────────────────────── */}
         <div className="relative pt-8 pb-16 text-center">
           <div className="inline-flex items-center gap-2 mb-6">
-            <Badge variant="burgundy" dot>
-              Careers & Opportunities
-            </Badge>
+            <h1 className="text-xs font-mono uppercase tracking-[0.2em] text-[#C8C2B3]">
+              <Badge variant="burgundy" dot>
+                Careers at SOMYA INNOVATIONS
+              </Badge>
+            </h1>
           </div>
 
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#F1EBDD] tracking-tight max-w-4xl mx-auto mb-6 leading-tight">
+          <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#F1EBDD] tracking-tight max-w-4xl mx-auto mb-6 leading-tight">
             Build the Future with SOMYA
-          </h1>
+          </h2>
 
           <p className="text-base sm:text-lg text-[#F1EBDD]/70 max-w-3xl mx-auto mb-6 leading-relaxed font-sans">
             We are building an emerging technology solutions enterprise that unites AI, IT infrastructure,

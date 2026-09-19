@@ -8,6 +8,8 @@ import { getOrganizationSchema, getWebSiteSchema } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { Analytics } from "@vercel/analytics/next";
 
+import Script from "next/script";
+
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const manrope = Manrope({
@@ -43,7 +45,7 @@ export const metadata: Metadata = {
     shortcut: ["/favicon.ico"],
   },
   alternates: {
-    canonical: "/",
+    canonical: `${COMPANY.siteUrl}/`,
   },
   openGraph: {
     type: "website",
@@ -51,13 +53,13 @@ export const metadata: Metadata = {
     siteName: COMPANY.name,
     title: COMPANY.seo.defaultTitle,
     description: COMPANY.seo.defaultDescription,
-    url: COMPANY.siteUrl,
+    url: `${COMPANY.siteUrl}/`,
     images: [
       {
-        url: "/branding/og-card.png",
+        url: `${COMPANY.siteUrl}/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "SOMYA INNOVATIONS — Technology • AI • IT Solutions",
+        alt: "SOMYA INNOVATIONS — AI, IT & Digital Solutions",
       },
     ],
   },
@@ -65,7 +67,10 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: COMPANY.seo.defaultTitle,
     description: COMPANY.seo.defaultDescription,
-    images: ["/branding/og-card.png"],
+    images: [`${COMPANY.siteUrl}/og-image.jpg`],
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
   },
   robots: {
     index: true,
@@ -87,6 +92,7 @@ export default function RootLayout({
 }>) {
   const orgSchema = getOrganizationSchema();
   const websiteSchema = getWebSiteSchema();
+  const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
   return (
     <html lang="en" className={cn(manrope.variable, instrumentSerif.variable, "font-sans", geist.variable)}>
@@ -101,6 +107,25 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
+        {/* Google Analytics 4 (Only active when configured) */}
+        {gaId && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gaId}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
+          </>
+        )}
       </head>
       <body className="min-h-screen flex flex-col bg-[#11110F] text-[#F1EBDD] selection:bg-[#641F2A] selection:text-[#F1EBDD]">
         {/* Skip to Main Content for keyboard & screen reader accessibility */}

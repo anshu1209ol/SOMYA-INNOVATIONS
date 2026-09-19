@@ -26,27 +26,33 @@ export const COMPANY = {
     github: "#",
   },
 
-  // Base Site URL for Canonical & OpenGraph resolution
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://somyainnovations.com",
+  // Base Site URL for Canonical & OpenGraph resolution (Preferred canonical host: https://www.somyainnovations.in/)
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://www.somyainnovations.in",
 
   // SEO defaults (Zero Trading mentions)
   seo: {
-    defaultTitle: "SOMYA INNOVATIONS | Technology • AI • IT Solutions",
+    defaultTitle: "SOMYA INNOVATIONS | AI, IT & Digital Solutions",
     titleTemplate: "%s | SOMYA INNOVATIONS",
     defaultDescription:
-      "SOMYA INNOVATIONS delivers practical technology solutions across AI, IT infrastructure, digital products, and enterprise technology equipment—built around real business requirements.",
+      "SOMYA INNOVATIONS delivers practical AI, IT infrastructure and digital technology solutions for businesses, from automation and software to technology products.",
     keywords: [
       "SOMYA INNOVATIONS",
-      "IT solutions",
-      "artificial intelligence",
-      "AI & automation",
+      "AI solutions",
+      "AI automation",
       "machine learning",
+      "computer vision",
+      "data analytics",
+      "IT solutions",
+      "IT infrastructure",
+      "networking",
+      "hardware",
+      "technical support",
       "digital solutions",
-      "custom software development",
-      "enterprise networking",
-      "cybersecurity",
+      "software development",
+      "web applications",
+      "API integration",
+      "cloud solutions",
       "technology products",
-      "business infrastructure",
     ],
     locale: "en_IN",
   },

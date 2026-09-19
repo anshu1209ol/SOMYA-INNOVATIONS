@@ -31,18 +31,27 @@ import {
   Users2,
   Compass,
 } from "lucide-react";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, getBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "About Us | Technology with a Business-First Approach",
+  title: "About SOMYA INNOVATIONS | Technology Solutions Company",
   description:
-    "Learn about SOMYA INNOVATIONS — an emerging technology enterprise integrating AI & Automation, IT Solutions, Digital Platforms, and Technology Products with engineering discipline.",
+    "Learn about SOMYA INNOVATIONS, a technology solutions company focused on practical AI, IT infrastructure and digital solutions for businesses.",
   path: "/about",
 });
 
 export default function AboutPage() {
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "About", url: "/about" },
+  ]);
+
   return (
     <div className="py-12 sm:py-16 lg:py-24 bg-[#E8DFCF] text-[#11110F]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <Breadcrumbs items={[{ label: "About" }]} />
@@ -50,12 +59,14 @@ export default function AboutPage() {
         {/* ─── 1. HERO SECTION ────────────────────────────────────────── */}
         <div className="relative pt-6 pb-20 lg:pb-28 text-center">
           <div className="inline-flex items-center gap-2 mb-6">
-            <Badge variant="burgundy" dot>
-              About SOMYA INNOVATIONS
-            </Badge>
+            <h1 className="text-xs font-mono uppercase tracking-[0.2em] text-[#641F2A]">
+              <Badge variant="burgundy" dot>
+                About SOMYA INNOVATIONS
+              </Badge>
+            </h1>
           </div>
 
-          <DisplayHeading className="max-w-4xl mx-auto mb-6 text-[#11110F]">
+          <DisplayHeading as="h2" className="max-w-4xl mx-auto mb-6 text-[#11110F]">
             Technology with a{" "}
             <EditorialHeading italic className="text-[#641F2A]">
               business-first approach.

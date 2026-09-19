@@ -9,9 +9,9 @@ export interface NavLink {
 export const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  { label: "AI Solutions", href: "/ai-solutions" },
-  { label: "IT Solutions", href: "/it-solutions" },
-  { label: "Digital Solutions", href: "/digital-solutions" },
+  { label: "AI Solutions", href: "/solutions/ai-automation" },
+  { label: "IT Solutions", href: "/solutions/it-solutions" },
+  { label: "Digital Solutions", href: "/solutions/digital-solutions" },
   { label: "Products", href: "/products" },
   { label: "Industries", href: "/industries" },
   { label: "Work", href: "/work" },
@@ -21,9 +21,9 @@ export const NAV_LINKS: NavLink[] = [
 
 export const FOOTER_LINKS = {
   solutions: [
-    { label: "AI & Automation", href: "/ai-solutions" },
-    { label: "IT Infrastructure", href: "/it-solutions" },
-    { label: "Digital Solutions", href: "/digital-solutions" },
+    { label: "AI & Automation", href: "/solutions/ai-automation" },
+    { label: "IT Infrastructure", href: "/solutions/it-solutions" },
+    { label: "Digital Solutions", href: "/solutions/digital-solutions" },
     { label: "Technology Products", href: "/products" },
     { label: "Industry Solutions", href: "/industries" },
   ],

@@ -15,12 +15,14 @@ export function createMetadata({
   description,
   path = "",
   openGraphType = "website",
-  image = "/branding/og-card.png",
+  image = "/og-image.jpg",
   noIndex = false,
 }: CreateMetadataOptions): Metadata {
   const cleanPath = path ? (path.startsWith("/") ? path : `/${path}`) : "";
-  const canonicalUrl = `${COMPANY.siteUrl}${cleanPath}`;
-  const fullImageUrl = image.startsWith("http") ? image : `${COMPANY.siteUrl}${image}`;
+  const canonicalUrl = cleanPath === "" || cleanPath === "/" 
+    ? `${COMPANY.siteUrl}/` 
+    : `${COMPANY.siteUrl}${cleanPath.replace(/\/$/, "")}`;
+  const fullImageUrl = image.startsWith("http") ? image : `${COMPANY.siteUrl}${image.startsWith("/") ? image : `/${image}`}`;
 
   return {
     title,
@@ -32,7 +34,7 @@ export function createMetadata({
       type: openGraphType,
       locale: COMPANY.seo.locale,
       url: canonicalUrl,
-      title: `${title} | SOMYA INNOVATIONS`,
+      title: title.includes(COMPANY.name) ? title : `${title} | ${COMPANY.name}`,
       description,
       siteName: COMPANY.name,
       images: [
@@ -40,13 +42,13 @@ export function createMetadata({
           url: fullImageUrl,
           width: 1200,
           height: 630,
-          alt: `${title} - SOMYA INNOVATIONS`,
+          alt: `${title} - ${COMPANY.name}`,
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} | SOMYA INNOVATIONS`,
+      title: title.includes(COMPANY.name) ? title : `${title} | ${COMPANY.name}`,
       description,
       images: [fullImageUrl],
     },
@@ -71,7 +73,7 @@ export function createMetadata({
 
 /**
  * Generates Schema.org JSON-LD for Organization.
- * Strictly avoids fabricated data, fake certifications, or simulated testimonials.
+ * Strictly verified data only — no fabricated phones, addresses, ratings or social accounts.
  */
 export function getOrganizationSchema() {
   return {
@@ -79,20 +81,22 @@ export function getOrganizationSchema() {
     "@type": "Organization",
     name: COMPANY.name,
     legalName: COMPANY.legalName,
-    url: COMPANY.siteUrl,
-    logo: `${COMPANY.siteUrl}/favicon.svg`,
+    url: `${COMPANY.siteUrl}/`,
+    logo: `${COMPANY.siteUrl}/branding/logo-mark.png`,
     description: COMPANY.seo.defaultDescription,
-    email: COMPANY.contact.email,
-    telephone: COMPANY.contact.phone,
     knowsAbout: [
       "Artificial Intelligence",
-      "Machine Learning Solutions",
-      "IT Infrastructure",
-      "Enterprise Computer Hardware",
+      "Machine Learning",
+      "Computer Vision",
+      "Intelligent Process Automation",
+      "Enterprise IT Infrastructure",
+      "Hardware and Systems",
       "Structured Networking",
-      "Digital Software Solutions",
+      "Cybersecurity Technology",
+      "Custom Software Development",
+      "Web Application Development",
+      "API and Cloud Architecture",
       "Technology Products",
-      "Enterprise Systems Architecture",
     ],
   };
 }
@@ -105,11 +109,86 @@ export function getWebSiteSchema() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: COMPANY.name,
-    url: COMPANY.siteUrl,
+    url: `${COMPANY.siteUrl}/`,
     description: COMPANY.seo.defaultDescription,
     publisher: {
       "@type": "Organization",
       name: COMPANY.name,
+    },
+  };
+}
+
+/**
+ * Generates Schema.org JSON-LD for BreadcrumbList.
+ */
+export function getBreadcrumbSchema(items: { name: string; url: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url.startsWith("http") ? item.url : `${COMPANY.siteUrl}${item.url}`,
+    })),
+  };
+}
+
+/**
+ * Generates Schema.org JSON-LD for an Article / Resource.
+ */
+export interface ArticleSchemaOptions {
+  headline: string;
+  description: string;
+  url: string;
+  image?: string;
+  datePublished?: string;
+  dateModified?: string;
+  authorName?: string;
+}
+
+export function getArticleSchema({
+  headline,
+  description,
+  url,
+  image,
+  datePublished,
+  dateModified,
+  authorName = COMPANY.name,
+}: ArticleSchemaOptions) {
+  const fullImageUrl = image
+    ? image.startsWith("http")
+      ? image
+      : `${COMPANY.siteUrl}${image.startsWith("/") ? image : `/${image}`}`
+    : `${COMPANY.siteUrl}/og-image.jpg`;
+
+  const canonicalUrl = url.startsWith("http") ? url : `${COMPANY.siteUrl}${url}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description,
+    url: canonicalUrl,
+    image: fullImageUrl,
+    datePublished: datePublished || undefined,
+    dateModified: dateModified || datePublished || undefined,
+    author: {
+      "@type": "Organization",
+      name: authorName,
+      url: `${COMPANY.siteUrl}/`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: COMPANY.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${COMPANY.siteUrl}/branding/logo-mark.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": canonicalUrl,
     },
   };
 }

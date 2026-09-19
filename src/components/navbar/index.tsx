@@ -29,38 +29,38 @@ import {
 const SOLUTIONS_DROPDOWN = [
   {
     title: "AI Solutions",
-    href: "/ai-solutions",
+    href: "/solutions/ai-automation",
     desc: "Autonomous intelligence, LLM workflows & predictive ML",
     icon: Brain,
     badge: "AI Powered",
     featuredItems: [
-      { label: "AI Strategy & Roadmap", href: "/ai-solutions#strategy" },
-      { label: "Machine Learning Models", href: "/ai-solutions#ml" },
-      { label: "Intelligent Automation", href: "/ai-solutions#automation" },
+      { label: "AI Strategy & Roadmap", href: "/solutions/ai-automation" },
+      { label: "Machine Learning Models", href: "/solutions/ai-automation#machine-learning" },
+      { label: "Intelligent Automation", href: "/solutions/ai-automation#ai-automation" },
     ],
   },
   {
     title: "IT Infrastructure",
-    href: "/it-solutions",
+    href: "/solutions/it-solutions",
     desc: "Enterprise cloud architecture, devops & zero-trust security",
     icon: Server,
     badge: "Enterprise",
     featuredItems: [
-      { label: "Cloud & Hybrid Systems", href: "/it-solutions#cloud" },
-      { label: "Cybersecurity Architecture", href: "/it-solutions#security" },
-      { label: "DevOps & SRE", href: "/it-solutions#devops" },
+      { label: "Hardware Provisioning", href: "/solutions/it-solutions#hardware" },
+      { label: "Networking Infrastructure", href: "/solutions/it-solutions#networking" },
+      { label: "Facility & Cyber Security", href: "/solutions/it-solutions#security" },
     ],
   },
   {
     title: "Digital Engineering",
-    href: "/digital-solutions",
+    href: "/solutions/digital-solutions",
     desc: "High-performance bespoke web, mobile & SaaS platforms",
     icon: Code2,
     badge: "Full-Stack",
     featuredItems: [
-      { label: "Bespoke SaaS Platforms", href: "/digital-solutions#saas" },
-      { label: "Modern Web & Mobile Apps", href: "/digital-solutions#web-mobile" },
-      { label: "API & Microservices", href: "/digital-solutions#microservices" },
+      { label: "Custom Software Platforms", href: "/solutions/digital-solutions#custom-software" },
+      { label: "Modern Web Applications", href: "/solutions/digital-solutions#web-applications" },
+      { label: "API & Cloud Architecture", href: "/solutions/digital-solutions#cloud-solutions" },
     ],
   },
 ];
@@ -160,6 +160,7 @@ export function Navbar() {
   };
 
   const isSolutionsActive =
+    pathname.startsWith("/solutions") ||
     pathname.startsWith("/ai-solutions") ||
     pathname.startsWith("/it-solutions") ||
     pathname.startsWith("/digital-solutions");

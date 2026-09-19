@@ -37,9 +37,9 @@ import {
 import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "SOMYA INNOVATIONS | Technology • AI • IT Solutions",
+  title: "SOMYA INNOVATIONS | AI, IT & Digital Solutions",
   description:
-    "SOMYA INNOVATIONS provides AI & automation, enterprise IT solutions, digital platforms, and technology products engineered for business performance.",
+    "SOMYA INNOVATIONS delivers practical AI, IT infrastructure and digital technology solutions for businesses, from automation and software to technology products.",
   path: "/",
 });
 

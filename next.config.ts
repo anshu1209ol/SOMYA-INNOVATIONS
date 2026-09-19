@@ -61,6 +61,42 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  // Permanent 301 redirects for legacy routes to canonical lowercase clean URLs
+  async redirects() {
+    return [
+      {
+        source: "/ai-solutions",
+        destination: "/solutions/ai-automation",
+        permanent: true,
+      },
+      {
+        source: "/services/ai-solutions",
+        destination: "/solutions/ai-automation",
+        permanent: true,
+      },
+      {
+        source: "/it-solutions",
+        destination: "/solutions/it-solutions",
+        permanent: true,
+      },
+      {
+        source: "/services/it-solutions",
+        destination: "/solutions/it-solutions",
+        permanent: true,
+      },
+      {
+        source: "/digital-solutions",
+        destination: "/solutions/digital-solutions",
+        permanent: true,
+      },
+      {
+        source: "/services/digital-solutions",
+        destination: "/solutions/digital-solutions",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

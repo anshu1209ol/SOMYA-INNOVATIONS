@@ -7,7 +7,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = COMPANY.siteUrl;
   const currentDate = new Date().toISOString();
 
-  // Static Business Pages
+  // Canonical Indexable Public URLs per Section 9
   const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: `${baseUrl}/`,
@@ -22,58 +22,34 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/services`,
+      url: `${baseUrl}/solutions/ai-automation`,
       lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/ai-solutions`,
+      url: `${baseUrl}/solutions/it-solutions`,
       lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/it-solutions`,
+      url: `${baseUrl}/solutions/digital-solutions`,
       lastModified: currentDate,
       changeFrequency: "weekly",
       priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/digital-solutions`,
-      lastModified: currentDate,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/services/ai-solutions`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/services/it-solutions`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/services/digital-solutions`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/industries`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.8,
     },
     {
       url: `${baseUrl}/products`,
       lastModified: currentDate,
       changeFrequency: "daily",
       priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/industries`,
+      lastModified: currentDate,
+      changeFrequency: "monthly",
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/work`,
@@ -105,7 +81,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    // Legal Pages
+    // Legal & Compliance Pages
     {
       url: `${baseUrl}/privacy-policy`,
       lastModified: currentDate,
@@ -132,7 +108,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  // Dynamic Product Pages
+  // Dynamic Public Products
   const products = await getProducts();
   const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${baseUrl}/products/${product.slug}`,
@@ -141,7 +117,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  // Dynamic Resource Articles
+  // Dynamic Public Resources
   const articles = await getResources();
   const resourceRoutes: MetadataRoute.Sitemap = articles.map((article) => ({
     url: `${baseUrl}/resources/${article.slug}`,

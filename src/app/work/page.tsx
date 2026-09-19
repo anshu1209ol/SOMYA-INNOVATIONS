@@ -26,20 +26,28 @@ import {
   CASE_STUDY_SCHEMA_SECTIONS,
   type CaseStudy,
 } from "@/lib/caseStudies";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, getBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "Work & Case Studies | Engineering Portfolio & Standards",
+  title: "Our Work | Technology Solutions | SOMYA INNOVATIONS",
   description:
-    "Explore our engineering methodology and case study framework. Selected work and case studies will be added as projects are completed.",
+    "Explore selected technology work, capabilities and solution areas from SOMYA INNOVATIONS.",
   path: "/work",
 });
 
 export default async function WorkPage() {
   const caseStudies: CaseStudy[] = await getCaseStudies();
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Work", url: "/work" },
+  ]);
 
   return (
     <div className="py-12 sm:py-16 lg:py-24 bg-[#11110F] text-[#F1EBDD]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <Breadcrumbs items={[{ label: "Work" }]} />
@@ -47,12 +55,14 @@ export default async function WorkPage() {
         {/* ─── HERO SECTION ────────────────────────────────────────────── */}
         <div className="relative pt-6 pb-16 text-center">
           <div className="inline-flex items-center gap-2 mb-6">
-            <Badge variant="burgundy" dot>
-              Case Studies & Portfolio
-            </Badge>
+            <h1 className="text-xs font-mono uppercase tracking-[0.2em] text-[#C8C2B3]">
+              <Badge variant="burgundy" dot>
+                Our Work
+              </Badge>
+            </h1>
           </div>
 
-          <DisplayHeading className="max-w-4xl mx-auto mb-6 text-[#F1EBDD]">
+          <DisplayHeading as="h2" className="max-w-4xl mx-auto mb-6 text-[#F1EBDD]">
             Engineered for{" "}
             <EditorialHeading italic className="text-[#E8DFCF]">
               operational impact.

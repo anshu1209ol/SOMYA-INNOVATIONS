@@ -11,20 +11,28 @@ import { ButtonLink } from "@/components/buttons";
 import { ArrowRight, ShieldCheck, Sparkles, LayoutDashboard } from "lucide-react";
 import { getProducts } from "@/lib/products";
 import { ProductCatalogClient } from "./ProductCatalogClient";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, getBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "Enterprise Software & AI Products | SaaS Dashboards & Automation",
+  title: "Technology Products | Computing, Networking & Electronics | SOMYA INNOVATIONS",
   description:
-    "Explore our suite of proprietary enterprise SaaS platforms, AI automation engines, and intelligent operational dashboards designed for rapid cloud and on-premise deployment.",
+    "Explore technology products across computing, networking, accessories, security, electronics and office technology. Request a quote for current pricing.",
   path: "/products",
 });
 
 export default async function ProductsPage() {
   const products = await getProducts();
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Products", url: "/products" },
+  ]);
 
   return (
     <div className="py-12 sm:py-16 lg:py-24 bg-[#11110F] text-[#F1EBDD]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}
         <Breadcrumbs items={[{ label: "Products" }]} />
@@ -32,15 +40,17 @@ export default async function ProductsPage() {
         {/* ─── HERO SECTION ────────────────────────────────────────────── */}
         <div className="relative pt-6 pb-14 text-center">
           <div className="inline-flex items-center gap-2 mb-6">
-            <Badge variant="burgundy" dot>
-              Enterprise Software & AI Platforms
-            </Badge>
+            <h1 className="text-xs font-mono uppercase tracking-[0.2em] text-[#C8C2B3]">
+              <Badge variant="burgundy" dot>
+                Technology Products
+              </Badge>
+            </h1>
           </div>
 
-          <DisplayHeading className="max-w-4xl mx-auto mb-6 text-[#F1EBDD]">
-            Proprietary Software &{" "}
+          <DisplayHeading as="h2" className="max-w-4xl mx-auto mb-6 text-[#F1EBDD]">
+            Technology Products &{" "}
             <EditorialHeading italic className="text-[#E8DFCF]">
-              AI Solutions
+              Enterprise Systems
             </EditorialHeading>
           </DisplayHeading>
 

@@ -22,12 +22,12 @@ import {
   FileSpreadsheet,
   CheckCircle,
 } from "lucide-react";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, getBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "Contact Us | Let's Build Something Better",
+  title: "Contact SOMYA INNOVATIONS | Technology Solutions",
   description:
-    "Connect with SOMYA INNOVATIONS for enterprise IT infrastructure, AI automation, custom digital software, and technology product enquiries.",
+    "Contact SOMYA INNOVATIONS to discuss AI, IT infrastructure, digital solutions or technology product requirements.",
   path: "/contact",
 });
 
@@ -59,8 +59,17 @@ const CONTACT_CARDS = [
 ];
 
 export default function ContactPage() {
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Contact", url: "/contact" },
+  ]);
+
   return (
     <div className="py-12 sm:py-16 lg:py-24 bg-[#F1EBDD] text-[#11110F]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <Breadcrumbs items={[{ label: "Contact" }]} />
@@ -68,12 +77,14 @@ export default function ContactPage() {
         {/* ─── HERO SECTION ────────────────────────────────────────────── */}
         <div className="relative pt-6 pb-16 text-center">
           <div className="inline-flex items-center gap-2 mb-6">
-            <Badge variant="burgundy" dot>
-              Communications & Enquiries
-            </Badge>
+            <h1 className="text-xs font-mono uppercase tracking-[0.2em] text-[#641F2A]">
+              <Badge variant="burgundy" dot>
+                Contact SOMYA INNOVATIONS
+              </Badge>
+            </h1>
           </div>
 
-          <DisplayHeading className="max-w-4xl mx-auto mb-6 text-[#11110F]">
+          <DisplayHeading as="h2" className="max-w-4xl mx-auto mb-6 text-[#11110F]">
             Let&apos;s build{" "}
             <EditorialHeading italic className="text-[#641F2A]">
               something better.

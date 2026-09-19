@@ -19,12 +19,12 @@ import {
   ArrowRight,
   Calculator,
 } from "lucide-react";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, getBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "Request a Quote | B2B Commercial & Technical Proposals",
+  title: "Request a Quote | SOMYA INNOVATIONS",
   description:
-    "Submit your technology requirements for a detailed, itemized commercial and technical quotation covering IT infrastructure, AI automation, software, and technology products.",
+    "Tell SOMYA INNOVATIONS about your technology requirements and request a quote for AI, IT, digital or technology product solutions.",
   path: "/request-quote",
 });
 
@@ -52,8 +52,17 @@ const QUOTATION_EXPECTATIONS = [
 ];
 
 export default function RequestQuotePage() {
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Request a Quote", url: "/request-quote" },
+  ]);
+
   return (
     <div className="py-12 sm:py-16 lg:py-24 bg-[#F1EBDD] text-[#11110F]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <Breadcrumbs items={[{ label: "Request a Quote" }]} />
@@ -61,12 +70,14 @@ export default function RequestQuotePage() {
         {/* ─── HERO SECTION ────────────────────────────────────────────── */}
         <div className="relative pt-6 pb-16 text-center">
           <div className="inline-flex items-center gap-2 mb-6">
-            <Badge variant="burgundy" dot>
-              B2B Quotation Portal
-            </Badge>
+            <h1 className="text-xs font-mono uppercase tracking-[0.2em] text-[#641F2A]">
+              <Badge variant="burgundy" dot>
+                Request a Quote
+              </Badge>
+            </h1>
           </div>
 
-          <DisplayHeading className="max-w-4xl mx-auto mb-6 text-[#11110F]">
+          <DisplayHeading as="h2" className="max-w-4xl mx-auto mb-6 text-[#11110F]">
             Request a Technical &{" "}
             <EditorialHeading italic className="text-[#641F2A]">
               Commercial Quote

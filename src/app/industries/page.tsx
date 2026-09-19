@@ -27,12 +27,12 @@ import {
   Compass,
 } from "lucide-react";
 
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, getBreadcrumbSchema } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "Industry Technology Solutions & Sector Applications",
+  title: "Technology Solutions for Businesses | SOMYA INNOVATIONS",
   description:
-    "Explore how SOMYA INNOVATIONS technology solutions across IT infrastructure, AI automation, custom software, and technology products apply to diverse customer environments.",
+    "Explore technology solutions designed around real business requirements across AI, IT infrastructure and digital products.",
   path: "/industries",
 });
 
@@ -306,8 +306,17 @@ const INDUSTRIES_DATA: IndustryProfile[] = [
 // ─── Page Component ──────────────────────────────────────────────
 
 export default function IndustriesPage() {
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Industries", url: "/industries" },
+  ]);
+
   return (
     <div className="py-12 sm:py-16 lg:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <Breadcrumbs items={[{ label: "Industries" }]} />
@@ -315,18 +324,20 @@ export default function IndustriesPage() {
         {/* ─── HERO SECTION ────────────────────────────────────────────── */}
         <div className="relative pt-6 pb-16 text-center">
           <div className="inline-flex items-center gap-2 mb-6">
-            <Badge variant="accent" dot>
-              Cross-Industry Applications
-            </Badge>
+            <h1 className="text-xs font-mono uppercase tracking-[0.2em] text-[#641F2A]">
+              <Badge variant="burgundy" dot>
+                Technology Solutions for Businesses
+              </Badge>
+            </h1>
           </div>
 
-          <DisplayHeading gradient className="max-w-4xl mx-auto mb-6">
+          <DisplayHeading as="h2" gradient className="max-w-4xl mx-auto mb-6">
             Technology Solutions Built for Diverse Industry Environments
           </DisplayHeading>
 
           <Text variant="lead" className="max-w-3xl mx-auto mb-10">
             SOMYA INNOVATIONS delivers practical capabilities across IT infrastructure, applied AI, custom software platforms,
-            and verified B2B equipment procurement configured around the specific operating realities of your sector.
+            and enterprise technology products configured around the specific operating realities of your sector.
           </Text>
 
           {/* Quick-Jump Industry Pills */}

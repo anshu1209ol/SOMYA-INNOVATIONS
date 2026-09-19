@@ -1,5 +1,14 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { ShieldOff } from 'lucide-react'
+
+export const metadata: Metadata = {
+  title: "Access Denied | SOMYA INNOVATIONS",
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
 
 export default function UnauthorizedPage() {
   return (

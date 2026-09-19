@@ -2,7 +2,7 @@ import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { createMetadata } from "@/lib/seo";
+import { createMetadata, getBreadcrumbSchema } from "@/lib/seo";
 import {
   getProductBySlug,
   getProducts,
@@ -55,7 +55,7 @@ export async function generateMetadata({
   }
 
   return createMetadata({
-    title: `${product.name} | ${product.category} Solutions`,
+    title: `${product.name} | Technology Products | SOMYA INNOVATIONS`,
     description: product.shortDescription,
     path: `/products/${product.slug}`,
   });
@@ -95,9 +95,18 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   }
 
   const relatedProducts = await getRelatedProducts(product.id, product.category, 3);
+  const breadcrumbSchema = getBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Products", url: "/products" },
+    { name: product.name, url: `/products/${product.slug}` },
+  ]);
 
   return (
     <div className="py-12 sm:py-16 lg:py-24 bg-[#11110F] text-[#F1EBDD]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <Breadcrumbs
@@ -138,15 +147,18 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               <div className="absolute top-0 right-0 w-64 h-64 bg-[#641F2A]/15 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#68704A]/10 rounded-full blur-3xl pointer-events-none" />
 
-              <div className="relative z-10 flex flex-col items-center text-center">
-                <div className="w-28 h-28 rounded-3xl bg-[#11110F] border border-[#641F2A]/40 flex items-center justify-center text-[#F1EBDD] shadow-2xl mb-6">
-                  <CategoryIcon category={product.category} className="w-14 h-14 text-[#E8DFCF]" />
-                </div>
-                <Badge variant="olive" size="sm" className="mb-2">
+              {/* Central Product Monogram Icon */}
+              <div className="w-24 h-24 rounded-2xl bg-[#11110F] border border-white/[0.1] flex items-center justify-center text-[#F1EBDD] mb-6 shadow-2xl relative z-10 group-hover:scale-105 transition-transform">
+                <CategoryIcon category={product.category} className="w-12 h-12 text-[#641F2A]" />
+              </div>
+
+              {/* Product Identifier Display */}
+              <div className="text-center relative z-10 space-y-1">
+                <span className="text-xs font-mono uppercase tracking-widest text-[#68704A] block">
                   {product.category}
-                </Badge>
-                <span className="text-xs font-mono text-[#F1EBDD]/50">
-                  CODE: {product.sku}
+                </span>
+                <span className="text-lg font-bold text-[#F1EBDD] block">
+                  {product.name}
                 </span>
               </div>
 
@@ -180,9 +192,9 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 </span>
               </div>
 
-              <H2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F1EBDD] tracking-tight">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F1EBDD] tracking-tight">
                 {product.name}
-              </H2>
+              </h1>
             </div>
 
             <Text className="text-base sm:text-lg text-[#F1EBDD]/90 leading-relaxed">
