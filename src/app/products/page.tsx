@@ -8,15 +8,15 @@ import {
   Breadcrumbs,
 } from "@/components/ui";
 import { ButtonLink } from "@/components/buttons";
-import { ArrowRight, ShieldCheck, Terminal, Cpu } from "lucide-react";
+import { ArrowRight, ShieldCheck, Sparkles, LayoutDashboard } from "lucide-react";
 import { getProducts } from "@/lib/products";
 import { ProductCatalogClient } from "./ProductCatalogClient";
 import { createMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createMetadata({
-  title: "Technology Products Catalogue | Enterprise Equipment & Systems",
+  title: "Enterprise Software & AI Products | SaaS Dashboards & Automation",
   description:
-    "Explore our commercial equipment catalogue across Computing, Networking, Accessories, Security, Electronics, and Office Technology with direct B2B quotation upon request.",
+    "Explore our suite of proprietary enterprise SaaS platforms, AI automation engines, and intelligent operational dashboards designed for rapid cloud and on-premise deployment.",
   path: "/products",
 });
 
@@ -33,35 +33,35 @@ export default async function ProductsPage() {
         <div className="relative pt-6 pb-14 text-center">
           <div className="inline-flex items-center gap-2 mb-6">
             <Badge variant="burgundy" dot>
-              Enterprise Technology Catalogue
+              Enterprise Software & AI Platforms
             </Badge>
           </div>
 
           <DisplayHeading className="max-w-4xl mx-auto mb-6 text-[#F1EBDD]">
-            Technology Products{" "}
+            Proprietary Software &{" "}
             <EditorialHeading italic className="text-[#E8DFCF]">
-              Catalogue
+              AI Solutions
             </EditorialHeading>
           </DisplayHeading>
 
           <Text variant="lead" className="max-w-3xl mx-auto mb-8 text-[#F1EBDD]/80">
-            Explore sample configurations and verified equipment categories available to support our client infrastructure deployments.
-            Every item is sourced through certified channels with full commercial warranty backing and direct quotation.
+            Explore our modular suite of enterprise SaaS platforms, AI automation engines, and intelligent operational dashboards.
+            Engineered for rapid deployment, private cloud isolation, and seamless data stack integration.
           </Text>
 
           {/* Quick Value Pillars */}
           <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-[#F1EBDD]/60 font-mono mb-8">
             <span className="flex items-center gap-1.5">
+              <Sparkles className="w-4 h-4 text-[#641F2A]" />
+              Autonomous AI & RAG Copilots
+            </span>
+            <span className="flex items-center gap-1.5">
+              <LayoutDashboard className="w-4 h-4 text-[#68704A]" />
+              Real-Time SaaS Dashboards
+            </span>
+            <span className="flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-[#68704A]" />
-              Verified OEM Hardware
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Terminal className="w-4 h-4 text-[#641F2A]" />
-              Enterprise Integration Support
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Cpu className="w-4 h-4 text-[#68704A]" />
-              Transparent B2B Quotes
+              Zero-Trust & SOC2 Compliance Ready
             </span>
           </div>
         </div>
@@ -74,25 +74,25 @@ export default async function ProductsPage() {
           <div className="relative rounded-3xl overflow-hidden bg-[#641F2A] text-[#F1EBDD] p-8 sm:p-14 text-center shadow-2xl border border-white/[0.1]">
             <div className="relative z-10 max-w-2xl mx-auto">
               <Badge variant="beige" dot className="mb-4">
-                Custom Hardware Specifications
+                Custom SaaS & AI Engineering
               </Badge>
               <h2 className="text-3xl sm:text-4xl font-bold text-[#F1EBDD] tracking-tight mb-4">
-                Need Specific Hardware Specifications?
+                Need a Custom SaaS Dashboard or AI Solution?
               </h2>
               <p className="text-sm sm:text-base text-[#F1EBDD]/80 leading-relaxed mb-8">
-                Looking for custom-configured server racks, high-throughput network appliances, specialized workstations,
-                or bulk office setup pricing? Our engineering team can fulfill exact component bills of materials.
+                Looking for customized AI workflows, private LLM deployments, specialized operational dashboards,
+                or custom enterprise API integrations? Our software engineering team designs and delivers end-to-end proprietary solutions.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <ButtonLink
-                  href="/request-quote?service=Technology+Products"
+                  href="/request-quote?service=AI+Solutions"
                   variant="secondary"
                   size="md"
                   className="w-full sm:w-auto bg-[#F1EBDD] text-[#11110F] hover:bg-white border-transparent"
                   icon={<ArrowRight className="w-4 h-4" />}
                 >
-                  Request Product Quote
+                  Request Solution Quote
                 </ButtonLink>
                 <ButtonLink
                   href="/contact"

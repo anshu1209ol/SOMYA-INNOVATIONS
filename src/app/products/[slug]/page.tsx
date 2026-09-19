@@ -21,15 +21,14 @@ import {
   CheckCircle,
   ShieldCheck,
   Info,
-  Monitor,
-  Network,
-  Mouse,
-  Video,
-  Tv,
-  Printer,
   Sparkles,
+  LayoutDashboard,
+  Workflow,
+  BarChart3,
+  Terminal,
   Layers,
   ArrowLeft,
+  Cpu,
 } from "lucide-react";
 
 interface ProductPageProps {
@@ -56,7 +55,7 @@ export async function generateMetadata({
   }
 
   return createMetadata({
-    title: `${product.name} | ${product.category} Equipment`,
+    title: `${product.name} | ${product.category} Solutions`,
     description: product.shortDescription,
     path: `/products/${product.slug}`,
   });
@@ -70,18 +69,18 @@ function CategoryIcon({
   className?: string;
 }) {
   switch (category) {
-    case "Computing":
-      return <Monitor className={className} />;
-    case "Networking":
-      return <Network className={className} />;
-    case "Accessories":
-      return <Mouse className={className} />;
-    case "Security":
-      return <Video className={className} />;
-    case "Electronics":
-      return <Tv className={className} />;
-    case "Office Technology":
-      return <Printer className={className} />;
+    case "AI Solutions":
+      return <Sparkles className={className} />;
+    case "SaaS Dashboards":
+      return <LayoutDashboard className={className} />;
+    case "Enterprise Automation":
+      return <Workflow className={className} />;
+    case "Analytics & Intelligence":
+      return <BarChart3 className={className} />;
+    case "Security & Governance":
+      return <ShieldCheck className={className} />;
+    case "Developer Platforms":
+      return <Terminal className={className} />;
     default:
       return <Sparkles className={className} />;
   }
@@ -98,7 +97,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   const relatedProducts = await getRelatedProducts(product.id, product.category, 3);
 
   return (
-    <div className="py-12 sm:py-16 lg:py-24">
+    <div className="py-12 sm:py-16 lg:py-24 bg-[#11110F] text-[#F1EBDD]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb Navigation */}
         <Breadcrumbs
@@ -113,21 +112,21 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         <div className="mb-6">
           <Link
             href="/products"
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-400 hover:text-white transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#F1EBDD]/60 hover:text-[#F1EBDD] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to Products Catalogue</span>
+            <span>Back to Products & Solutions</span>
           </Link>
         </div>
 
-        {/* ─── DEMO CATALOG SOURCING NOTICE ───────────────────────────── */}
-        <div className="mb-10 p-4 rounded-xl bg-indigo-950/20 border border-indigo-500/20 flex items-start gap-3">
-          <Info className="w-4 h-4 text-indigo-400 mt-0.5 shrink-0" />
-          <p className="text-xs text-zinc-400 leading-relaxed">
-            <span className="font-semibold text-zinc-200">Catalogue Architecture Notice:</span>{" "}
-            This item illustrates equipment configurations available through our procurement network.
-            In adherence to B2B transparent sourcing standards, static retail prices are not listed.
-            Contact our procurement desk for current OEM batch pricing, availability lead-times, and customized configurations.
+        {/* ─── ENTERPRISE SOFTWARE ARCHITECTURE NOTICE ─────────────────── */}
+        <div className="mb-10 p-4 rounded-xl bg-[#1B1B18] border border-[#2A2A26] flex items-start gap-3">
+          <Info className="w-4 h-4 text-[#68704A] mt-0.5 shrink-0" />
+          <p className="text-xs text-[#F1EBDD]/70 leading-relaxed">
+            <span className="font-semibold text-[#F1EBDD]">Software Architecture Notice:</span>{" "}
+            This product is proprietary enterprise software developed by SOMYA INNOVATIONS.
+            Deployments are provisioned with enterprise SLA guarantees, role-based access control, and seamless data stack integration.
+            Request an itemized quotation for licensing, multi-tenant setup, and custom workflow development.
           </p>
         </div>
 
@@ -135,30 +134,30 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-20">
           {/* Left Column: Product Visual Showcase */}
           <div className="lg:col-span-5">
-            <div className="rounded-3xl bg-zinc-900/40 border border-white/[0.08] p-8 sm:p-12 relative overflow-hidden flex flex-col items-center justify-center min-h-[360px]">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500/[0.08] rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/[0.06] rounded-full blur-3xl pointer-events-none" />
+            <div className="rounded-3xl bg-[#1B1B18] border border-[#2A2A26] p-8 sm:p-12 relative overflow-hidden flex flex-col items-center justify-center min-h-[360px]">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-[#641F2A]/15 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#68704A]/10 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10 flex flex-col items-center text-center">
-                <div className="w-28 h-28 rounded-3xl bg-gradient-to-br from-indigo-500/20 via-zinc-800/80 to-zinc-900 border border-indigo-500/30 flex items-center justify-center text-indigo-400 shadow-2xl mb-6">
-                  <CategoryIcon category={product.category} className="w-14 h-14" />
+                <div className="w-28 h-28 rounded-3xl bg-[#11110F] border border-[#641F2A]/40 flex items-center justify-center text-[#F1EBDD] shadow-2xl mb-6">
+                  <CategoryIcon category={product.category} className="w-14 h-14 text-[#E8DFCF]" />
                 </div>
-                <Badge variant="accent" size="sm" className="mb-2">
+                <Badge variant="olive" size="sm" className="mb-2">
                   {product.category}
                 </Badge>
-                <span className="text-xs font-mono text-zinc-500">
-                  SKU: {product.sku}
+                <span className="text-xs font-mono text-[#F1EBDD]/50">
+                  CODE: {product.sku}
                 </span>
               </div>
 
               {/* Status footer inside visual */}
-              <div className="mt-8 pt-4 w-full border-t border-white/[0.06] flex items-center justify-between text-xs text-zinc-400 relative z-10">
+              <div className="mt-8 pt-4 w-full border-t border-white/[0.06] flex items-center justify-between text-xs text-[#F1EBDD]/60 relative z-10 font-mono">
                 <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-[#68704A] animate-pulse" />
                   {product.availability}
                 </span>
-                <span className="font-mono text-indigo-300">
-                  Commercial Warranty Backed
+                <span className="text-[#E8DFCF]">
+                  Enterprise SLA Backed
                 </span>
               </div>
             </div>
@@ -168,41 +167,41 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <div className="lg:col-span-7 space-y-6">
             <div>
               <div className="flex flex-wrap items-center gap-2 mb-3">
-                <Badge variant="default">
+                <Badge variant="burgundy">
                   {product.category}
                 </Badge>
                 {product.badge && (
-                  <Badge variant="violet">
+                  <Badge variant="beige">
                     {product.badge}
                   </Badge>
                 )}
-                <span className="text-xs font-mono text-zinc-500">
+                <span className="text-xs font-mono text-[#F1EBDD]/50">
                   {product.sku}
                 </span>
               </div>
 
-              <H2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+              <H2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#F1EBDD] tracking-tight">
                 {product.name}
               </H2>
             </div>
 
-            <Text className="text-base sm:text-lg text-zinc-300 leading-relaxed">
+            <Text className="text-base sm:text-lg text-[#F1EBDD]/90 leading-relaxed">
               {product.shortDescription}
             </Text>
 
-            <p className="text-sm text-zinc-400 leading-relaxed">
+            <p className="text-sm text-[#F1EBDD]/70 leading-relaxed">
               {product.longDescription}
             </p>
 
             {/* Feature Highlights Bullets */}
-            <div className="p-6 rounded-2xl bg-zinc-900/30 border border-white/[0.06] space-y-3">
-              <span className="text-xs font-semibold text-zinc-300 uppercase tracking-wider block">
-                Key Architecture Highlights
+            <div className="p-6 rounded-2xl bg-[#1B1B18] border border-[#2A2A26] space-y-3">
+              <span className="text-xs font-semibold text-[#F1EBDD] uppercase tracking-wider block">
+                Key Architectural Capabilities
               </span>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {product.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2 text-xs text-zinc-300">
-                    <CheckCircle className="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5" />
+                  <li key={feature} className="flex items-start gap-2 text-xs text-[#F1EBDD]/80">
+                    <CheckCircle className="w-3.5 h-3.5 text-[#68704A] shrink-0 mt-0.5" />
                     <span>{feature}</span>
                   </li>
                 ))}
@@ -215,29 +214,33 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 href={`/request-quote?product=${encodeURIComponent(product.name)}&sku=${encodeURIComponent(product.sku)}`}
                 variant="primary"
                 size="md"
-                className="w-full sm:w-auto shadow-[0_0_20px_rgba(99,102,241,0.3)]"
+                className="w-full sm:w-auto"
                 icon={<ArrowRight className="w-4 h-4" />}
               >
-                Request Product Quote
+                Request Solution Quote
               </ButtonLink>
               <ButtonLink
-                href={`/contact?subject=${encodeURIComponent(`Price Enquiry: ${product.name}`)}`}
+                href={`/contact?subject=${encodeURIComponent(`Solution Inquiry: ${product.name}`)}`}
                 variant="secondary"
                 size="md"
-                className="w-full sm:w-auto"
+                className="w-full sm:w-auto border-white/20 text-[#F1EBDD] hover:bg-white/10"
               >
-                Get Latest Price
+                Schedule Architecture Demo
               </ButtonLink>
             </div>
 
-            <div className="flex flex-wrap items-center gap-6 text-xs text-zinc-500 font-mono pt-2">
+            <div className="flex flex-wrap items-center gap-6 text-xs text-[#F1EBDD]/50 font-mono pt-2">
               <span className="flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                No Fabricated Pricing
+                <ShieldCheck className="w-3.5 h-3.5 text-[#68704A]" />
+                Zero-Trust Security & RBAC
               </span>
               <span className="flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-indigo-400" />
-                Volume Discounts on Bulk Orders
+                <Layers className="w-3.5 h-3.5 text-[#641F2A]" />
+                Private Cloud or On-Premise
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Cpu className="w-3.5 h-3.5 text-[#68704A]" />
+                High Availability & Monitoring
               </span>
             </div>
           </div>
@@ -248,29 +251,29 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <Badge variant="cyan" dot className="mb-2">
-                  Engineering Breakdown
+                <Badge variant="olive" dot className="mb-2">
+                  Technical Architecture Breakdown
                 </Badge>
-                <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                  Technical Specifications
+                <h3 className="text-xl sm:text-2xl font-bold text-[#F1EBDD] tracking-tight">
+                  Software Specifications & Engineering Details
                 </h3>
               </div>
-              <span className="text-xs font-mono text-zinc-500 hidden sm:block">
-                OEM SOURCING PARAMETERS
+              <span className="text-xs font-mono text-[#F1EBDD]/50 hidden sm:block">
+                SYSTEM ARCHITECTURE MATRIX
               </span>
             </div>
 
-            <div className="rounded-2xl border border-white/[0.08] overflow-hidden bg-zinc-900/30">
+            <div className="rounded-2xl border border-[#2A2A26] overflow-hidden bg-[#1B1B18]">
               <div className="divide-y divide-white/[0.06]">
                 {Object.entries(product.specs).map(([key, value]) => (
                   <div
                     key={key}
                     className="grid grid-cols-1 sm:grid-cols-12 p-4 sm:px-6 hover:bg-white/[0.02] transition-colors gap-2"
                   >
-                    <div className="sm:col-span-4 text-xs font-semibold text-zinc-400">
+                    <div className="sm:col-span-4 text-xs font-semibold text-[#F1EBDD]/70">
                       {key}
                     </div>
-                    <div className="sm:col-span-8 text-xs font-mono text-zinc-200">
+                    <div className="sm:col-span-8 text-xs font-mono text-[#F1EBDD]">
                       {value}
                     </div>
                   </div>
@@ -285,18 +288,18 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           <section className="py-16 border-t border-white/[0.08]">
             <div className="flex items-center justify-between mb-10">
               <div>
-                <Badge variant="accent" dot className="mb-2">
-                  Complementary Equipment
+                <Badge variant="burgundy" dot className="mb-2">
+                  Complementary Solutions
                 </Badge>
-                <h3 className="text-2xl font-bold text-white tracking-tight">
-                  Related Products in {product.category}
+                <h3 className="text-2xl font-bold text-[#F1EBDD] tracking-tight">
+                  Related Solutions in {product.category}
                 </h3>
               </div>
               <Link
                 href="/products"
-                className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 transition-colors inline-flex items-center gap-1"
+                className="text-xs font-semibold text-[#E8DFCF] hover:text-white transition-colors inline-flex items-center gap-1"
               >
-                <span>View Full Catalogue</span>
+                <span>View All Solutions</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -306,23 +309,23 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 return (
                   <div
                     key={relProduct.id}
-                    className="group flex flex-col justify-between p-6 rounded-2xl bg-zinc-900/40 border border-white/[0.08] hover:border-indigo-500/30 transition-all duration-300 hover-elevate"
+                    className="group flex flex-col justify-between p-6 rounded-2xl bg-[#1B1B18] border border-[#2A2A26] hover:border-[#641F2A]/50 transition-all duration-300 hover-elevate"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
-                          <CategoryIcon category={relProduct.category} className="w-5 h-5" />
+                        <div className="w-10 h-10 rounded-xl bg-[#641F2A]/15 border border-[#641F2A]/30 flex items-center justify-center text-[#F1EBDD]">
+                          <CategoryIcon category={relProduct.category} className="w-5 h-5 text-[#E8DFCF]" />
                         </div>
-                        <span className="text-[10px] font-mono text-zinc-500">
+                        <span className="text-[10px] font-mono text-[#F1EBDD]/50">
                           {relProduct.sku}
                         </span>
                       </div>
-                      <h4 className="text-base font-bold text-white mb-2 group-hover:text-indigo-300 transition-colors">
+                      <h4 className="text-base font-bold text-[#F1EBDD] mb-2 group-hover:text-[#E8DFCF] transition-colors">
                         <Link href={`/products/${relProduct.slug}`}>
                           {relProduct.name}
                         </Link>
                       </h4>
-                      <p className="text-xs text-zinc-400 line-clamp-2 mb-4">
+                      <p className="text-xs text-[#F1EBDD]/70 line-clamp-2 mb-4">
                         {relProduct.shortDescription}
                       </p>
                     </div>
@@ -330,15 +333,15 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                     <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
                       <Link
                         href={`/products/${relProduct.slug}`}
-                        className="text-xs font-semibold text-zinc-400 hover:text-white transition-colors"
+                        className="text-xs font-semibold text-[#F1EBDD]/60 hover:text-white transition-colors"
                       >
-                        View Specs
+                        View Architecture
                       </Link>
                       <Link
                         href={`/request-quote?product=${encodeURIComponent(relProduct.name)}`}
-                        className="text-xs font-semibold text-indigo-400 hover:text-indigo-300 inline-flex items-center gap-1"
+                        className="text-xs font-semibold text-[#E8DFCF] hover:text-white inline-flex items-center gap-1"
                       >
-                        <span>Get Price</span>
+                        <span>Request Quote</span>
                         <ArrowRight className="w-3 h-3" />
                       </Link>
                     </div>
@@ -351,12 +354,12 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
 
         {/* ─── BOTTOM REQUEST QUOTE CALLOUT ───────────────────────────── */}
         <section className="py-16 border-t border-white/[0.08]">
-          <div className="p-8 sm:p-12 rounded-3xl bg-zinc-900/50 border border-white/[0.08] text-center max-w-3xl mx-auto space-y-6">
-            <h3 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-              Ready to Order or Inquire About This Equipment?
+          <div className="p-8 sm:p-12 rounded-3xl bg-[#1B1B18] border border-[#2A2A26] text-center max-w-3xl mx-auto space-y-6">
+            <h3 className="text-2xl sm:text-3xl font-bold text-[#F1EBDD] tracking-tight">
+              Ready to Deploy or Inquire About This Platform?
             </h3>
-            <p className="text-sm text-zinc-400 leading-relaxed max-w-xl mx-auto">
-              Our hardware specialists verify component availability, OEM lead-times, and multi-unit enterprise volume discounts.
+            <p className="text-sm text-[#F1EBDD]/70 leading-relaxed max-w-xl mx-auto">
+              Our engineering team provides full architectural blueprints, data migration support, and custom integrations tailored to your enterprise stack.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
               <ButtonLink
@@ -367,8 +370,8 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
               >
                 Request Quote for {product.name}
               </ButtonLink>
-              <ButtonLink href="/products" variant="secondary" size="md">
-                Browse More Equipment
+              <ButtonLink href="/products" variant="secondary" size="md" className="border-white/20 text-[#F1EBDD] hover:bg-white/10">
+                Browse All Software Products
               </ButtonLink>
             </div>
           </div>

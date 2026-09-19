@@ -82,6 +82,26 @@ export async function POST(request: Request) {
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
     const referenceId = `QTE-${Date.now().toString(36).toUpperCase()}-${randomSuffix}`;
 
+    // 8. Persist to Supabase database
+    try {
+      const { createAdminClient } = await import("@/lib/supabase/admin");
+      const supabase = createAdminClient();
+      await supabase.from("quote_requests").insert({
+        full_name: sanitizedData.fullName,
+        company: sanitizedData.company || null,
+        email: sanitizedData.email,
+        phone: sanitizedData.phone || null,
+        service_category: sanitizedData.serviceCategory,
+        product_or_service: sanitizedData.productServiceRequired || null,
+        quantity: sanitizedData.quantity || null,
+        budget_range: sanitizedData.budgetRange || null,
+        message: sanitizedData.message,
+        reference_id: referenceId,
+      });
+    } catch (dbError) {
+      console.error("[DB] Failed to persist quote request:", dbError);
+    }
+
     // Audit trail log
     console.info(`[Audit] Quote request registered: ref=${referenceId}, category="${sanitizedData.serviceCategory}"`);
 

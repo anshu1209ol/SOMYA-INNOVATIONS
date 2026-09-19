@@ -69,6 +69,24 @@ export async function POST(request: Request) {
     const randomSuffix = Math.random().toString(36).substring(2, 6).toUpperCase();
     const referenceId = `ENQ-${Date.now().toString(36).toUpperCase()}-${randomSuffix}`;
 
+    // 7. Persist to Supabase database
+    try {
+      const { createAdminClient } = await import("@/lib/supabase/admin");
+      const supabase = createAdminClient();
+      await supabase.from("contact_submissions").insert({
+        name: sanitizedData.fullName,
+        email: sanitizedData.email,
+        phone: sanitizedData.phone || null,
+        company: sanitizedData.company || null,
+        subject: sanitizedData.subject,
+        message: sanitizedData.message,
+        reference_id: referenceId,
+      });
+    } catch (dbError) {
+      // Log but don't fail the user-facing response if DB insert fails
+      console.error("[DB] Failed to persist contact submission:", dbError);
+    }
+
     // Audit trail log (records reference ID without exposing raw message contents)
     console.info(`[Audit] Contact enquiry received: ref=${referenceId}, subject="${sanitizedData.subject.slice(0, 30)}"`);
 

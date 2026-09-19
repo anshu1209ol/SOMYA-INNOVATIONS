@@ -116,16 +116,16 @@ export function Footer() {
 
           {/* Column 2: Solutions (3 cols on lg) */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#F1EBDD]/90 font-mono">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[#F1EBDD] font-mono">
               Solutions & Pillars
-            </h4>
+            </h3>
             <nav aria-label="Footer Solutions Links">
               <ul className="space-y-2.5">
                 {FOOTER_LINKS.solutions.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-[#F1EBDD]/70 hover:text-[#F1EBDD] transition-colors duration-150 inline-flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-[#641F2A] rounded"
+                      className="text-sm text-[#F1EBDD]/85 hover:text-white transition-colors duration-150 inline-flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-[#641F2A] rounded"
                     >
                       <span>{link.label}</span>
                     </Link>
@@ -137,16 +137,16 @@ export function Footer() {
 
           {/* Column 3: Company (2 cols on lg) */}
           <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#F1EBDD]/90 font-mono">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[#F1EBDD] font-mono">
               Company
-            </h4>
+            </h3>
             <nav aria-label="Footer Company Links">
               <ul className="space-y-2.5">
                 {FOOTER_LINKS.company.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-[#F1EBDD]/70 hover:text-[#F1EBDD] transition-colors duration-150 inline-flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-[#641F2A] rounded"
+                      className="text-sm text-[#F1EBDD]/85 hover:text-white transition-colors duration-150 inline-flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-[#641F2A] rounded"
                     >
                       <span>{link.label}</span>
                     </Link>
@@ -158,16 +158,16 @@ export function Footer() {
 
           {/* Column 4: Legal & Portals (2 cols on lg) */}
           <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-semibold uppercase tracking-wider text-[#F1EBDD]/90 font-mono">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-[#F1EBDD] font-mono">
               Legal & Access
-            </h4>
+            </h3>
             <nav aria-label="Footer Legal Links">
               <ul className="space-y-2.5">
                 {FOOTER_LINKS.legal.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-[#F1EBDD]/70 hover:text-[#F1EBDD] transition-colors duration-150 inline-flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-[#641F2A] rounded"
+                      className="text-sm text-[#F1EBDD]/85 hover:text-white transition-colors duration-150 inline-flex items-center gap-1.5 focus-visible:outline-2 focus-visible:outline-[#641F2A] rounded"
                     >
                       <span>{link.label}</span>
                     </Link>
@@ -176,7 +176,7 @@ export function Footer() {
                 <li className="pt-2 border-t border-white/[0.08]">
                   <Link
                     href="/ceo"
-                    className="text-xs font-mono text-[#68704A] hover:text-[#F1EBDD] transition-colors"
+                    className="text-xs font-mono text-[#A2AD7B] hover:text-[#F1EBDD] transition-colors"
                   >
                     CEO Portal
                   </Link>
@@ -184,7 +184,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/admin"
-                    className="text-xs font-mono text-[#68704A] hover:text-[#F1EBDD] transition-colors"
+                    className="text-xs font-mono text-[#A2AD7B] hover:text-[#F1EBDD] transition-colors"
                   >
                     Admin Console
                   </Link>
@@ -192,7 +192,7 @@ export function Footer() {
                 <li>
                   <Link
                     href="/tech-lead"
-                    className="text-xs font-mono text-[#68704A] hover:text-[#F1EBDD] transition-colors"
+                    className="text-xs font-mono text-[#A2AD7B] hover:text-[#F1EBDD] transition-colors"
                   >
                     Tech Lead System
                   </Link>

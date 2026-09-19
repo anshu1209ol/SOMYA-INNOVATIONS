@@ -29,30 +29,30 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const variants: Record<string, string> = {
-    burgundy: "bg-[#641F2A]/15 text-[#641F2A] border-[#641F2A]/30",
-    olive: "bg-[#68704A]/15 text-[#68704A] border-[#68704A]/30",
+    burgundy: "bg-[#641F2A]/30 text-[#F1EBDD] border-[#641F2A]/50",
+    olive: "bg-[#68704A]/25 text-[#3D4327] border-[#68704A]/40",
     beige: "bg-[#F1EBDD]/15 text-[#F1EBDD] border-[#F1EBDD]/25",
     dark: "bg-[#11110F] text-[#F1EBDD] border-white/15",
     outline: "bg-transparent text-current border-current/30",
     // Backwards-compatibility aliases with luxury quiet tones
     default: "bg-[#1B1B18] text-[#E8DFCF] border-white/10",
-    accent: "bg-[#641F2A]/20 text-[#F1EBDD] border-[#641F2A]/40",
-    violet: "bg-[#641F2A]/20 text-[#F1EBDD] border-[#641F2A]/40",
-    cyan: "bg-[#68704A]/20 text-[#F1EBDD] border-[#68704A]/40",
-    success: "bg-[#68704A]/20 text-[#F1EBDD] border-[#68704A]/40",
+    accent: "bg-[#641F2A]/30 text-[#F1EBDD] border-[#641F2A]/50",
+    violet: "bg-[#641F2A]/30 text-[#F1EBDD] border-[#641F2A]/50",
+    cyan: "bg-[#68704A]/25 text-[#F1EBDD] border-[#68704A]/40",
+    success: "bg-[#68704A]/25 text-[#F1EBDD] border-[#68704A]/40",
   };
 
   const dotColors: Record<string, string> = {
-    burgundy: "bg-[#641F2A]",
+    burgundy: "bg-[#E28292]",
     olive: "bg-[#68704A]",
     beige: "bg-[#F1EBDD]",
     dark: "bg-[#F1EBDD]",
     outline: "bg-current",
     default: "bg-[#E8DFCF]",
-    accent: "bg-[#641F2A]",
-    violet: "bg-[#641F2A]",
-    cyan: "bg-[#68704A]",
-    success: "bg-[#68704A]",
+    accent: "bg-[#E28292]",
+    violet: "bg-[#E28292]",
+    cyan: "bg-[#A2AD7B]",
+    success: "bg-[#A2AD7B]",
   };
 
   const sizes = {

@@ -62,15 +62,15 @@ export default function HomePage() {
 
           {/* Vertical manifesto text: SOLVE BUILD INNOVATE GROW */}
           <div className="absolute top-[18%] right-[12%] z-10 space-y-1 text-right">
-            <p className="text-[13px] font-mono tracking-[0.3em] text-[#C8C2B3]/80 uppercase">Solve</p>
-            <p className="text-[13px] font-mono tracking-[0.3em] text-[#C8C2B3]/80 uppercase">Build</p>
-            <p className="text-[13px] font-mono tracking-[0.3em] text-[#C8C2B3]/80 uppercase">Innovate</p>
-            <p className="text-[13px] font-mono tracking-[0.3em] text-[#C8C2B3]/80 uppercase">Grow</p>
+            <p className="text-xs font-mono tracking-[0.3em] text-[#F1EBDD] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] uppercase">Solve</p>
+            <p className="text-xs font-mono tracking-[0.3em] text-[#F1EBDD] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] uppercase">Build</p>
+            <p className="text-xs font-mono tracking-[0.3em] text-[#F1EBDD] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] uppercase">Innovate</p>
+            <p className="text-xs font-mono tracking-[0.3em] text-[#F1EBDD] drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)] uppercase">Grow</p>
           </div>
 
           {/* Bottom-right: BUILDING MEANINGFUL SOLUTIONS */}
           <div className="absolute bottom-8 right-8 z-10 text-right">
-            <p className="text-[10px] font-mono tracking-[0.25em] text-[#C8C2B3]/70 uppercase leading-relaxed">
+            <p className="text-xs font-mono tracking-[0.25em] text-[#F1EBDD] drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)] uppercase leading-relaxed">
               Building<br />
               Meaningful<br />
               Solutions
@@ -147,7 +147,7 @@ export default function HomePage() {
             </div>
 
             {/* Service labels with thin separators */}
-            <div className="flex flex-wrap items-center gap-x-0 text-[10px] font-mono tracking-[0.2em] uppercase text-[#C8C2B3]/60">
+            <div className="flex flex-wrap items-center gap-x-0 text-xs font-mono tracking-[0.2em] uppercase text-[#F1EBDD]/85">
               <span className="w-6 h-px bg-[#C8C2B3]/30 mr-3" />
               <span className="pr-4">AI & Automation</span>
               <span className="w-px h-3 bg-[#C8C2B3]/25 mr-4" />
@@ -164,17 +164,17 @@ export default function HomePage() {
           <div className="absolute bottom-8 left-6 sm:left-8 lg:left-10 flex items-center gap-3 z-10">
             <button
               type="button"
-              aria-label="Previous"
-              className="w-8 h-8 flex items-center justify-center text-[#C8C2B3]/50 hover:text-[#F1EBDD] transition-colors"
+              aria-label="Previous slide"
+              className="w-9 h-9 rounded-lg flex items-center justify-center bg-[#11110F]/90 hover:bg-[#11110F] border border-white/20 text-[#F1EBDD] transition-colors focus-visible:outline-2 focus-visible:outline-[#641F2A]"
             >
-              <span className="text-lg">←</span>
+              <span className="text-base" aria-hidden="true">←</span>
             </button>
             <button
               type="button"
-              aria-label="Next"
-              className="w-8 h-8 flex items-center justify-center text-[#C8C2B3]/50 hover:text-[#F1EBDD] transition-colors"
+              aria-label="Next slide"
+              className="w-9 h-9 rounded-lg flex items-center justify-center bg-[#11110F]/90 hover:bg-[#11110F] border border-white/20 text-[#F1EBDD] transition-colors focus-visible:outline-2 focus-visible:outline-[#641F2A]"
             >
-              <span className="text-lg">→</span>
+              <span className="text-base" aria-hidden="true">→</span>
             </button>
           </div>
         </div>
@@ -377,7 +377,7 @@ export default function HomePage() {
             </div>
 
             <div className="p-8 rounded-2xl bg-[#F1EBDD] border border-black/[0.08] hover-elevate">
-              <span className="text-xs font-mono text-[#68704A] font-bold block mb-3">PRINCIPLE 02</span>
+              <span className="text-xs font-mono text-[#495033] font-bold block mb-3">PRINCIPLE 02</span>
               <h3 className="text-xl font-bold text-[#11110F] tracking-tight mb-3">
                 Commercial Alignment
               </h3>
@@ -475,7 +475,7 @@ export default function HomePage() {
                   <div className="w-10 h-10 rounded-lg bg-[#641F2A]/20 border border-[#641F2A]/30 flex items-center justify-center text-[#F1EBDD] mb-4 group-hover:scale-105 transition-transform">
                     <Icon className="w-5 h-5" />
                   </div>
-                  <h4 className="text-base font-bold text-[#F1EBDD] mb-2">{item.title}</h4>
+                  <h3 className="text-base font-bold text-[#F1EBDD] mb-2">{item.title}</h3>
                   <p className="text-xs text-[#F1EBDD]/70 leading-relaxed">{item.desc}</p>
                 </div>
               );
@@ -555,7 +555,7 @@ export default function HomePage() {
                         {pillar.badge}
                       </span>
                     </div>
-                    <h4 className="text-base font-bold text-[#11110F] mb-2">{pillar.title}</h4>
+                    <h3 className="text-base font-bold text-[#11110F] mb-2">{pillar.title}</h3>
                     <p className="text-xs text-[#11110F]/70 leading-relaxed mb-4">{pillar.desc}</p>
                   </div>
                   <div className="pt-3 border-t border-black/[0.08] text-[11px] font-mono text-[#68704A] font-semibold">
@@ -678,7 +678,7 @@ export default function HomePage() {
                   <span className="text-[11px] font-mono uppercase tracking-wider text-[#E8DFCF]/70">
                     MANUFACTURING & QUALITY
                   </span>
-                  <span className="text-xs font-mono text-[#68704A] font-bold">99.4% ACCURACY</span>
+                  <span className="text-xs font-mono text-[#A2AD7B] font-bold">99.4% ACCURACY</span>
                 </div>
                 <h3 className="text-xl font-bold text-[#F1EBDD] mb-3">
                   Computer Vision Automated Defect Detection
@@ -693,7 +693,7 @@ export default function HomePage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-[#F1EBDD]/50">False Positive Rate:</span>
-                    <span className="font-mono text-[#68704A]">&lt; 0.6%</span>
+                    <span className="font-mono text-[#A2AD7B]">&lt; 0.6%</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-[#F1EBDD]/50">Deployment:</span>
@@ -719,7 +719,7 @@ export default function HomePage() {
                   <span className="text-[11px] font-mono uppercase tracking-wider text-[#E8DFCF]/70">
                     LOGISTICS & NETWORKING
                   </span>
-                  <span className="text-xs font-mono text-[#68704A] font-bold">99.99% UPTIME</span>
+                  <span className="text-xs font-mono text-[#A2AD7B] font-bold">99.99% UPTIME</span>
                 </div>
                 <h3 className="text-xl font-bold text-[#F1EBDD] mb-3">
                   Multi-Site Network Redundancy & Zero-Trust
@@ -730,7 +730,7 @@ export default function HomePage() {
                 <div className="space-y-2.5 pt-4 border-t border-white/[0.08] text-xs text-[#F1EBDD]/80">
                   <div className="flex justify-between">
                     <span className="text-[#F1EBDD]/50">Failover Latency:</span>
-                    <span className="font-mono text-[#68704A]">&lt; 100ms</span>
+                    <span className="font-mono text-[#A2AD7B]">&lt; 100ms</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-[#F1EBDD]/50">Encryption:</span>
@@ -760,7 +760,7 @@ export default function HomePage() {
                   <span className="text-[11px] font-mono uppercase tracking-wider text-[#E8DFCF]/70">
                     COMMERCE & DIGITAL
                   </span>
-                  <span className="text-xs font-mono text-[#68704A] font-bold">85% TIME SAVED</span>
+                  <span className="text-xs font-mono text-[#A2AD7B] font-bold">85% TIME SAVED</span>
                 </div>
                 <h3 className="text-xl font-bold text-[#F1EBDD] mb-3">
                   Enterprise Portal & Automated Reconciliation
@@ -771,7 +771,7 @@ export default function HomePage() {
                 <div className="space-y-2.5 pt-4 border-t border-white/[0.08] text-xs text-[#F1EBDD]/80">
                   <div className="flex justify-between">
                     <span className="text-[#F1EBDD]/50">Data Accuracy:</span>
-                    <span className="font-mono text-[#68704A]">99.8% Verified</span>
+                    <span className="font-mono text-[#A2AD7B]">99.8% Verified</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-[#F1EBDD]/50">Audit Trail:</span>

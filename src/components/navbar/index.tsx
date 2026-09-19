@@ -200,7 +200,10 @@ export function Navbar() {
 
               <div className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <span className="text-base sm:text-lg font-bold text-[#F1EBDD] tracking-tight group-hover:text-white transition-colors">
+                  <span
+                    className="text-base sm:text-lg font-semibold text-[#F1EBDD] tracking-tight uppercase group-hover:text-white transition-colors"
+                    style={{ fontFamily: "var(--font-manrope), sans-serif" }}
+                  >
                     {COMPANY.name}
                   </span>
                   <span className="hidden md:inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono tracking-wider font-semibold uppercase bg-white/[0.05] text-[#C8C2B3] border border-white/10">
@@ -215,7 +218,7 @@ export function Navbar() {
 
             {/* Desktop Navigation */}
             <nav
-              className="hidden lg:flex items-center p-1 rounded-full bg-white/[0.03] border border-white/[0.07] backdrop-blur-md shadow-inner"
+              className="hidden lg:flex items-center p-1 rounded-full bg-[#161614] border border-white/15 backdrop-blur-md shadow-md"
               aria-label="Primary navigation"
             >
               <Link
@@ -224,8 +227,8 @@ export function Navbar() {
                 className={cn(
                   "px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200",
                   pathname === "/"
-                    ? "text-[#F1EBDD] bg-white/[0.12] shadow-sm"
-                    : "text-[#F1EBDD]/70 hover:text-[#F1EBDD] hover:bg-white/[0.05]"
+                    ? "text-[#F1EBDD] bg-white/[0.12] shadow-sm font-semibold"
+                    : "text-[#F1EBDD]/85 hover:text-white hover:bg-white/[0.08]"
                 )}
               >
                 Home
@@ -246,8 +249,8 @@ export function Navbar() {
                   className={cn(
                     "flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#641F2A]",
                     isSolutionsActive || solutionsOpen
-                      ? "text-[#F1EBDD] bg-white/[0.12] shadow-sm"
-                      : "text-[#F1EBDD]/70 hover:text-[#F1EBDD] hover:bg-white/[0.05]"
+                      ? "text-[#F1EBDD] bg-white/[0.12] shadow-sm font-semibold"
+                      : "text-[#F1EBDD]/85 hover:text-white hover:bg-white/[0.08]"
                   )}
                 >
                   <span>Solutions</span>
@@ -354,7 +357,7 @@ export function Navbar() {
                       "relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 flex items-center gap-1.5",
                       active
                         ? "text-[#F1EBDD] bg-white/[0.12] shadow-sm font-semibold"
-                        : "text-[#F1EBDD]/70 hover:text-[#F1EBDD] hover:bg-white/[0.05]"
+                        : "text-[#F1EBDD]/85 hover:text-white hover:bg-white/[0.08]"
                     )}
                   >
                     <span>{link.label}</span>
@@ -450,7 +453,10 @@ export function Navbar() {
                     className="w-full h-full object-contain rounded-md"
                   />
                 </div>
-                <span className="text-sm font-bold text-[#F1EBDD] tracking-tight">
+                <span
+                  className="text-sm font-semibold text-[#F1EBDD] tracking-tight uppercase"
+                  style={{ fontFamily: "var(--font-manrope), sans-serif" }}
+                >
                   {COMPANY.name}
                 </span>
               </div>

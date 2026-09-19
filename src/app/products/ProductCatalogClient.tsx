@@ -5,13 +5,12 @@ import Link from "next/link";
 import {
   Search,
   ArrowRight,
-  Monitor,
-  Network,
-  Mouse,
-  Video,
-  Tv,
-  Printer,
   Sparkles,
+  LayoutDashboard,
+  Workflow,
+  BarChart3,
+  ShieldCheck,
+  Terminal,
   CheckCircle,
   X,
   SlidersHorizontal,
@@ -32,18 +31,18 @@ function CategoryIcon({
   className?: string;
 }) {
   switch (category) {
-    case "Computing":
-      return <Monitor className={className} />;
-    case "Networking":
-      return <Network className={className} />;
-    case "Accessories":
-      return <Mouse className={className} />;
-    case "Security":
-      return <Video className={className} />;
-    case "Electronics":
-      return <Tv className={className} />;
-    case "Office Technology":
-      return <Printer className={className} />;
+    case "AI Solutions":
+      return <Sparkles className={className} />;
+    case "SaaS Dashboards":
+      return <LayoutDashboard className={className} />;
+    case "Enterprise Automation":
+      return <Workflow className={className} />;
+    case "Analytics & Intelligence":
+      return <BarChart3 className={className} />;
+    case "Security & Governance":
+      return <ShieldCheck className={className} />;
+    case "Developer Platforms":
+      return <Terminal className={className} />;
     default:
       return <Sparkles className={className} />;
   }
@@ -76,16 +75,16 @@ export function ProductCatalogClient({ initialProducts }: ProductCatalogClientPr
 
   return (
     <div>
-      {/* ─── Transparent Demo & Sourcing Notice ──────────────────────── */}
+      {/* ─── Enterprise Software & AI Notice ────────────────────────── */}
       <div className="mb-10 p-5 rounded-2xl bg-[#1B1B18] border border-white/[0.08] flex items-start gap-4">
         <Info className="w-5 h-5 text-[#68704A] mt-0.5 shrink-0" />
         <div className="text-xs text-[#F1EBDD]/70 leading-relaxed">
           <span className="font-bold text-[#F1EBDD] block mb-1">
-            Catalogue Architecture & Specifications Notice
+            Enterprise Software & AI Products Notice
           </span>
-          The items listed below represent sample configurations and capability offerings available to support client operations.
-          In accordance with our commercial policy, we do not publish static or fabricated prices.
-          Click <span className="text-[#F1EBDD] font-bold">&quot;Request Quote&quot;</span> or <span className="text-[#F1EBDD] font-bold">&quot;Get Latest Price&quot;</span> on any item to receive an itemized B2B quotation tailored to your exact deployment requirements.
+          The platforms listed below represent modular SaaS products, proprietary AI models, and operational dashboards developed by SOMYA INNOVATIONS.
+          Each solution is engineered for high availability, zero-trust security, and custom enterprise integration.
+          Click <span className="text-[#F1EBDD] font-bold">&quot;Request Quote&quot;</span> or view any product to receive an itemized deployment proposal tailored to your technical requirements.
         </div>
       </div>
 
@@ -94,7 +93,7 @@ export function ProductCatalogClient({ initialProducts }: ProductCatalogClientPr
         {/* Search Bar */}
         <div className="relative max-w-2xl mx-auto">
           <label htmlFor="product-search-input" className="sr-only">
-            Search products catalogue
+            Search software and AI products
           </label>
           <Search className="w-5 h-5 text-[#F1EBDD]/40 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" aria-hidden="true" />
           <input
@@ -102,8 +101,8 @@ export function ProductCatalogClient({ initialProducts }: ProductCatalogClientPr
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search equipment by model, category, specifications or SKU (e.g. PoE, DDR5, 4K)..."
-            aria-label="Search equipment by model, category, specifications or SKU"
+            placeholder="Search software by name, category, capability, or tech stack (e.g. Copilot, RAG, Telemetry, Gateway)..."
+            aria-label="Search software by name, category, capability, or tech stack"
             className="w-full pl-12 pr-10 py-3.5 rounded-xl bg-[#1B1B18] border border-white/[0.1] text-sm text-[#F1EBDD] placeholder-[#F1EBDD]/40 focus:outline-none focus:border-[#641F2A] focus:ring-1 focus:ring-[#641F2A] transition-all"
           />
           {searchQuery && (
