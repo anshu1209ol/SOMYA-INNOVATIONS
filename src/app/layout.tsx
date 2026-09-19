@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { COMPANY } from "@/lib/constants";
 import { getOrganizationSchema, getWebSiteSchema } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/next";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
@@ -111,6 +112,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
