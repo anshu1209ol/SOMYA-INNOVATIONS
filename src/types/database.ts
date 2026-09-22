@@ -64,7 +64,7 @@ export interface Profile {
   job_title: string | null
   department: string | null
   is_active: boolean
-  status?: 'invited' | 'active' | 'suspended' | 'terminated'
+  status?: 'invited' | 'active' | 'suspended' | 'terminated' | 'pending'
   terminated_at?: string | null
   terminated_by?: string | null
   termination_reason?: string | null

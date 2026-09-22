@@ -165,6 +165,25 @@ export function Navbar() {
     pathname.startsWith("/it-solutions") ||
     pathname.startsWith("/digital-solutions");
 
+  // Do not render marketing Navbar on internal management portals or dedicated auth pages
+  const isManagementOrAuth =
+    pathname.startsWith('/admin') ||
+    pathname.startsWith('/ceo') ||
+    pathname.startsWith('/tech-lead') ||
+    pathname.startsWith('/profile') ||
+    pathname.startsWith('/settings') ||
+    pathname.startsWith('/attendance') ||
+    pathname.startsWith('/login') ||
+    pathname.startsWith('/signup') ||
+    pathname.startsWith('/forgot-password') ||
+    pathname.startsWith('/reset-password') ||
+    pathname.startsWith('/verify-email') ||
+    pathname.startsWith('/unauthorized');
+
+  if (isManagementOrAuth) {
+    return null;
+  }
+
   return (
     <>
       <header

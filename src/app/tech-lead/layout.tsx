@@ -1,6 +1,6 @@
 import React from 'react'
 import { requireRole } from '@/lib/auth/guards'
-import { ManagementSidebar } from '@/components/management/ManagementSidebar'
+import { TechLeadSidebar } from '@/components/management/TechLeadSidebar'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,8 +13,7 @@ export default async function TechLeadLayout({
 
   return (
     <div className="flex min-h-screen bg-[#0D0D0B] text-[#F1EBDD]">
-      <ManagementSidebar
-        portal="tech-lead"
+      <TechLeadSidebar
         userEmail={context.user.email}
         userRole={context.roles[0] || 'tech_lead'}
       />

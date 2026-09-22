@@ -10,192 +10,311 @@ import {
   Clock,
   ArrowRight,
   TrendingUp,
-  Building,
-  Sparkles,
+  Compass,
+  CheckCircle2,
+  AlertCircle,
+  Clock3,
+  Calendar,
+  Shield,
+  Building2,
 } from 'lucide-react'
 import { createMetadata } from '@/lib/seo'
 import { getCeoMetrics } from '@/lib/actions/operations'
 import { ManagementHeader } from '@/components/management/ManagementHeader'
 
 export const metadata: Metadata = createMetadata({
-  title: 'Executive Strategic Briefing | CEO Dashboard',
-  description: 'Executive strategic briefing, four-pillar portfolio performance, and commercial growth trajectory for SOMYA INNOVATIONS leadership.',
+  title: 'Executive Strategic Briefing | SOMYA CEO System',
+  description: 'Executive decision-making briefing, strategic roadmap governance, and project delivery health for SOMYA INNOVATIONS leadership.',
   path: '/ceo',
   noIndex: true,
 })
 
 export const dynamic = 'force-dynamic'
 
+// Strategic Priorities Definition for Executive Governance
+const STRATEGIC_PRIORITIES = [
+  {
+    priority: 'Enterprise AI Inspection Deployment',
+    owner: 'Technology & AI Team',
+    status: 'In Progress',
+    statusColor: 'bg-[#68704A]/25 text-[#E8DFCF] border-[#68704A]/40',
+    deadline: 'Q4 2026',
+    impact: 'High Margin Industrial Expansion',
+  },
+  {
+    priority: 'Zero-Trust Campus Network Deliveries',
+    owner: 'Infrastructure Practice',
+    status: 'On Track',
+    statusColor: 'bg-[#68704A]/25 text-[#E8DFCF] border-[#68704A]/40',
+    deadline: 'Q4 2026',
+    impact: 'Regional Enterprise Penetration',
+  },
+  {
+    priority: 'High-Performance SaaS Platform Engine',
+    owner: 'Digital Engineering',
+    status: 'Planning',
+    statusColor: 'bg-white/[0.05] text-[#F1EBDD]/60 border-white/10',
+    deadline: 'Q1 2027',
+    impact: 'Recurring Software Subscriptions',
+  },
+]
+
 export default async function CeoPortalPage() {
   const metrics = await getCeoMetrics()
+
+  // Evaluate Project Health dynamically from active projects
+  const healthCounts = {
+    healthy: 0,
+    atRisk: 0,
+    delayed: 0,
+    critical: 0,
+  }
+
+  metrics.activeProjects.forEach((p) => {
+    if (p.priority === 'critical') healthCounts.critical++
+    else if (p.priority === 'high') healthCounts.atRisk++
+    else if (p.status === 'on_hold') healthCounts.delayed++
+    else healthCounts.healthy++
+  })
 
   return (
     <div className="space-y-8">
       <ManagementHeader
         title="Executive Strategic Briefing"
-        subtitle="Executive governance across AI & Automation, IT Infrastructure, Digital Solutions, and Technology Products."
+        subtitle="Executive governance across strategic initiatives, business portfolio, and project delivery health."
+        actions={
+          <div className="flex items-center gap-2">
+            <Link
+              href="/ceo/strategy"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-[#F1EBDD] text-xs font-mono border border-[#2A2A26] transition-colors"
+            >
+              <Compass className="w-3.5 h-3.5 text-[#A2AD7B]" />
+              <span>Strategic Roadmap</span>
+            </Link>
+            <Link
+              href="/ceo/reports"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#641F2A] hover:bg-[#852E3B] text-[#F1EBDD] text-xs font-semibold shadow-sm transition-colors"
+            >
+              <TrendingUp className="w-3.5 h-3.5" />
+              <span>Boardroom Report</span>
+            </Link>
+          </div>
+        }
       />
 
-      {/* High-Level Executive Real KPIs */}
-      <section className="grid grid-cols-2 lg:grid-cols-5 gap-4">
-        <div className="p-5 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-2">
-          <div className="flex items-center justify-between text-[#F1EBDD]/60 text-[10px] font-mono uppercase">
-            <span>ACTIVE CLIENTS</span>
-            <Briefcase className="w-3.5 h-3.5 text-[#A2AD7B]" />
+      {/* Large Executive KPI Cards */}
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-3 relative overflow-hidden">
+          <div className="flex items-center justify-between text-[#F1EBDD]/60 text-xs font-mono uppercase">
+            <span>Enterprise Clients</span>
+            <Briefcase className="w-4 h-4 text-[#A2AD7B]" />
           </div>
-          <div className="text-3xl font-bold font-serif text-[#F1EBDD]">
+          <div className="text-4xl font-bold font-serif text-[#F1EBDD]">
             {metrics.activeClientsCount}
           </div>
-          <p className="text-[10px] font-mono text-[#F1EBDD]/50">
-            {metrics.activeClientsCount === 0 ? 'No active accounts' : 'Commercial partnerships'}
+          <p className="text-xs font-mono text-[#F1EBDD]/50">
+            {metrics.activeClientsCount === 0 ? 'No active accounts' : 'Contracted client partners'}
           </p>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-2">
-          <div className="flex items-center justify-between text-[#F1EBDD]/60 text-[10px] font-mono uppercase">
-            <span>ACTIVE PROJECTS</span>
-            <Layers className="w-3.5 h-3.5 text-[#A2AD7B]" />
+        <div className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-3 relative overflow-hidden">
+          <div className="flex items-center justify-between text-[#F1EBDD]/60 text-xs font-mono uppercase">
+            <span>Contracted Deliveries</span>
+            <Layers className="w-4 h-4 text-[#A2AD7B]" />
           </div>
-          <div className="text-3xl font-bold font-serif text-[#F1EBDD]">
+          <div className="text-4xl font-bold font-serif text-[#F1EBDD]">
             {metrics.activeProjectsCount}
           </div>
-          <p className="text-[10px] font-mono text-[#F1EBDD]/50">
-            {metrics.activeProjectsCount === 0 ? 'No active deliveries' : 'Contracted delivery work'}
+          <p className="text-xs font-mono text-[#F1EBDD]/50">
+            {metrics.activeProjectsCount === 0 ? 'Zero active deliverables' : 'Active engagement scope'}
           </p>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-2">
-          <div className="flex items-center justify-between text-[#F1EBDD]/60 text-[10px] font-mono uppercase">
-            <span>QUALIFIED PIPELINE</span>
-            <Target className="w-3.5 h-3.5 text-[#A2AD7B]" />
+        <div className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-3 relative overflow-hidden">
+          <div className="flex items-center justify-between text-[#F1EBDD]/60 text-xs font-mono uppercase">
+            <span>Business Pipeline</span>
+            <Target className="w-4 h-4 text-[#A2AD7B]" />
           </div>
-          <div className="text-3xl font-bold font-serif text-[#F1EBDD]">
+          <div className="text-4xl font-bold font-serif text-[#F1EBDD]">
             {metrics.openOpportunitiesCount}
           </div>
-          <p className="text-[10px] font-mono text-[#F1EBDD]/50">
-            {metrics.openOpportunitiesCount === 0 ? 'No open proposals' : 'In commercial negotiation'}
+          <p className="text-xs font-mono text-[#F1EBDD]/50">
+            {metrics.openOpportunitiesCount === 0 ? 'No open proposals' : 'Qualified commercial briefs'}
           </p>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-2">
-          <div className="flex items-center justify-between text-[#F1EBDD]/60 text-[10px] font-mono uppercase">
-            <span>QUOTATIONS AWAITING</span>
-            <FileText className="w-3.5 h-3.5 text-[#A2AD7B]" />
+        <div className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-3 relative overflow-hidden">
+          <div className="flex items-center justify-between text-[#F1EBDD]/60 text-xs font-mono uppercase">
+            <span>Pending Quotations</span>
+            <FileText className="w-4 h-4 text-[#A2AD7B]" />
           </div>
-          <div className="text-3xl font-bold font-serif text-[#F1EBDD]">
+          <div className="text-4xl font-bold font-serif text-[#F1EBDD]">
             {metrics.pendingQuotationsCount}
           </div>
-          <p className="text-[10px] font-mono text-[#F1EBDD]/50">
-            {metrics.pendingQuotationsCount === 0 ? 'Zero pending' : 'Pending client signoff'}
-          </p>
-        </div>
-
-        <div className="p-5 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-2">
-          <div className="flex items-center justify-between text-[#F1EBDD]/60 text-[10px] font-mono uppercase">
-            <span>WORKFORCE</span>
-            <Users className="w-3.5 h-3.5 text-[#A2AD7B]" />
-          </div>
-          <div className="text-3xl font-bold font-serif text-[#F1EBDD]">
-            {metrics.totalWorkforceCount}
-          </div>
-          <p className="text-[10px] font-mono text-[#F1EBDD]/50">
-            Internal engineers & operations
+          <p className="text-xs font-mono text-[#F1EBDD]/50">
+            {metrics.pendingQuotationsCount === 0 ? 'Zero awaiting approval' : 'Awaiting client signoff'}
           </p>
         </div>
       </section>
 
-      {/* Strategic Priorities Section */}
-      <section className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-4">
-        <div className="flex items-center gap-2">
-          <Target className="w-4 h-4 text-[#A2AD7B]" />
-          <h2 className="text-sm font-bold text-[#F1EBDD] tracking-tight uppercase font-mono">
-            Company Strategic Priorities
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="p-4 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1.5">
-            <span className="text-[10px] font-mono text-[#A2AD7B] uppercase">Priority 01</span>
-            <h4 className="font-semibold text-xs text-[#F1EBDD]">
-              Enterprise AI Defect Vision Deployment
-            </h4>
-            <p className="text-[11px] text-[#F1EBDD]/60 leading-relaxed font-sans">
-              Scaling edge computer vision systems across industrial manufacturing clients.
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1.5">
-            <span className="text-[10px] font-mono text-[#A2AD7B] uppercase">Priority 02</span>
-            <h4 className="font-semibold text-xs text-[#F1EBDD]">
-              Zero-Trust Campus Network Deployments
-            </h4>
-            <p className="text-[11px] text-[#F1EBDD]/60 leading-relaxed font-sans">
-              Standardizing Layer 2/3 network segmentation and hardware appliances for regional enterprises.
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1.5">
-            <span className="text-[10px] font-mono text-[#A2AD7B] uppercase">Priority 03</span>
-            <h4 className="font-semibold text-xs text-[#F1EBDD]">
-              High-Trust Digital Application Delivery
-            </h4>
-            <p className="text-[11px] text-[#F1EBDD]/60 leading-relaxed font-sans">
-              Executing production Next.js and secure API backends for client operations with zero downtime.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Active Projects Delivery Health */}
+      {/* Project Health Categorization (Executive Summary) */}
       <section className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-4">
         <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-sm font-bold text-[#F1EBDD] tracking-tight uppercase font-mono">
-              Project Delivery Health
-            </h2>
-            <p className="text-xs text-[#F1EBDD]/60 font-sans">
-              Active engineering contracts and client milestones
-            </p>
+          <div className="flex items-center gap-2">
+            <Shield className="w-4 h-4 text-[#A2AD7B]" />
+            <h3 className="text-sm font-bold text-[#F1EBDD] font-mono uppercase tracking-wide">
+              Portfolio Delivery Health
+            </h3>
           </div>
           <Link
-            href="/admin/projects"
+            href="/ceo/projects"
             className="text-xs font-mono text-[#E8DFCF] hover:underline"
           >
-            View all projects &rarr;
+            All Projects &rarr;
           </Link>
         </div>
 
-        {metrics.activeProjects.length === 0 ? (
-          <p className="text-xs text-[#F1EBDD]/50 font-mono py-6 text-center">
-            No active project engagements currently registered in the database.
-          </p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {metrics.activeProjects.map((p) => (
-              <div
-                key={p.id}
-                className="p-4 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-2"
-              >
-                <div className="flex items-center justify-between">
-                  <h4 className="font-semibold text-xs text-[#F1EBDD]">{p.name}</h4>
-                  <span className="text-[10px] font-mono text-[#A2AD7B] uppercase">
-                    {p.status}
-                  </span>
-                </div>
-                <div className="w-full bg-white/[0.05] rounded-full h-1.5 overflow-hidden">
-                  <div
-                    className="bg-[#68704A] h-full rounded-full transition-all"
-                    style={{ width: `${p.progress}%` }}
-                  />
-                </div>
-                <div className="flex items-center justify-between text-[10px] font-mono text-[#F1EBDD]/50">
-                  <span>Priority: {p.priority}</span>
-                  <span>Progress: {p.progress}%</span>
-                </div>
-              </div>
-            ))}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="p-4 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+            <span className="text-[10px] font-mono text-[#A2AD7B] uppercase">Healthy Delivery</span>
+            <div className="text-2xl font-bold font-serif text-[#F1EBDD]">{healthCounts.healthy}</div>
+            <p className="text-[11px] text-[#F1EBDD]/50">On schedule & within scope</p>
           </div>
-        )}
+
+          <div className="p-4 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+            <span className="text-[10px] font-mono text-amber-300 uppercase">At Risk</span>
+            <div className="text-2xl font-bold font-serif text-amber-300">{healthCounts.atRisk}</div>
+            <p className="text-[11px] text-[#F1EBDD]/50">Requires executive monitoring</p>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+            <span className="text-[10px] font-mono text-[#E8DFCF]/70 uppercase">Delayed / On Hold</span>
+            <div className="text-2xl font-bold font-serif text-[#E8DFCF]">{healthCounts.delayed}</div>
+            <p className="text-[11px] text-[#F1EBDD]/50">Pending client dependency</p>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+            <span className="text-[10px] font-mono text-red-400 uppercase">Critical Blockers</span>
+            <div className="text-2xl font-bold font-serif text-red-400">{healthCounts.critical}</div>
+            <p className="text-[11px] text-[#F1EBDD]/50">Escalation needed</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Strategic Priorities Matrix */}
+      <section className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Compass className="w-4 h-4 text-[#A2AD7B]" />
+            <h3 className="text-sm font-bold text-[#F1EBDD] font-mono uppercase tracking-wide">
+              Corporate Strategic Priorities
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-[#F1EBDD]/40 uppercase">Executive Roadmap</span>
+        </div>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <thead className="bg-[#1B1B18] text-[#F1EBDD]/50 font-mono text-[10px] uppercase border-b border-[#2A2A26]">
+              <tr>
+                <th className="px-4 py-3">Initiative</th>
+                <th className="px-4 py-3">Responsible Practice</th>
+                <th className="px-4 py-3">Strategic Impact</th>
+                <th className="px-4 py-3">Target Timeline</th>
+                <th className="px-4 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[#2A2A26] text-[#F1EBDD]/80">
+              {STRATEGIC_PRIORITIES.map((sp) => (
+                <tr key={sp.priority} className="hover:bg-white/[0.02]">
+                  <td className="px-4 py-3.5 font-semibold text-[#F1EBDD]">
+                    {sp.priority}
+                  </td>
+                  <td className="px-4 py-3.5 font-mono text-[#E8DFCF]">
+                    {sp.owner}
+                  </td>
+                  <td className="px-4 py-3.5 text-[#F1EBDD]/70 font-sans">
+                    {sp.impact}
+                  </td>
+                  <td className="px-4 py-3.5 font-mono text-[#A2AD7B]">
+                    {sp.deadline}
+                  </td>
+                  <td className="px-4 py-3.5">
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono border ${sp.statusColor}`}>
+                      {sp.status}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      {/* Team Distribution & Headcount Overview */}
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Users className="w-4 h-4 text-[#A2AD7B]" />
+              <h3 className="text-sm font-bold text-[#F1EBDD] font-mono uppercase tracking-wide">
+                Workforce Headcount Overview
+              </h3>
+            </div>
+            <Link
+              href="/ceo/team"
+              className="text-xs font-mono text-[#E8DFCF] hover:underline"
+            >
+              Team details &rarr;
+            </Link>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#1B1B18] border border-[#2A2A26] flex items-center justify-between">
+            <div>
+              <div className="text-3xl font-bold font-serif text-[#F1EBDD]">
+                {metrics.totalWorkforceCount}
+              </div>
+              <div className="text-xs font-mono text-[#F1EBDD]/50 mt-1">
+                Active Organization Staff & Contractors
+              </div>
+            </div>
+            <Link
+              href="/admin/attendance"
+              className="px-3.5 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-xs font-mono text-[#E8DFCF] border border-[#2A2A26] transition-colors"
+            >
+              Attendance Hub &rarr;
+            </Link>
+          </div>
+        </div>
+
+        <div className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-4">
+          <div className="flex items-center gap-2">
+            <Building2 className="w-4 h-4 text-[#A2AD7B]" />
+            <h3 className="text-sm font-bold text-[#F1EBDD] font-mono uppercase tracking-wide">
+              Practice Areas Governance
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-3 gap-3 text-center">
+            <div className="p-3 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+              <span className="text-[10px] font-mono text-[#A2AD7B]">Pillar 01</span>
+              <div className="text-xs font-semibold text-[#F1EBDD]">AI & Automation</div>
+              <p className="text-[10px] text-[#F1EBDD]/40">Active</p>
+            </div>
+
+            <div className="p-3 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+              <span className="text-[10px] font-mono text-[#A2AD7B]">Pillar 02</span>
+              <div className="text-xs font-semibold text-[#F1EBDD]">IT Infrastructure</div>
+              <p className="text-[10px] text-[#F1EBDD]/40">Active</p>
+            </div>
+
+            <div className="p-3 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+              <span className="text-[10px] font-mono text-[#A2AD7B]">Pillar 03</span>
+              <div className="text-xs font-semibold text-[#F1EBDD]">Digital Solutions</div>
+              <p className="text-[10px] text-[#F1EBDD]/40">Active</p>
+            </div>
+          </div>
+        </div>
       </section>
     </div>
   )

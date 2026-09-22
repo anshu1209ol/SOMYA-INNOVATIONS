@@ -22,6 +22,8 @@ import {
   ExternalLink,
   Target,
   Sparkles,
+  Settings,
+  User,
 } from 'lucide-react'
 import { signOut } from '@/lib/auth/actions'
 import type { AppRole } from '@/types'
@@ -89,8 +91,9 @@ export function ManagementSidebar({
       ],
     })
     sections.push({
-      title: 'PORTAL BRIDGES',
+      title: 'SYSTEM & SETTINGS',
       items: [
+        { label: 'System Settings', href: '/tech-lead/settings', icon: Settings },
         { label: 'Operations Admin', href: '/admin', icon: Briefcase },
         { label: 'CEO Executive Desk', href: '/ceo', icon: Target },
       ],
@@ -112,15 +115,18 @@ export function ManagementSidebar({
       ],
     })
     sections.push({
-      title: 'WORKFORCE',
+      title: 'PEOPLE & WORKFORCE',
       items: [
-        { label: 'Attendance & Punches', href: '/admin/attendance', icon: Clock },
-        { label: 'Team Directory', href: '/tech-lead/people', icon: Users },
+        { label: 'Attendance Hub', href: '/admin/attendance', icon: Clock },
+        { label: 'Today & Shift Punches', href: '/admin/attendance/today', icon: Clock },
+        { label: 'Leave Workflow', href: '/admin/attendance/leave', icon: Calendar },
+        { label: 'Team Directory', href: '/admin/attendance/employees', icon: Users },
       ],
     })
     sections.push({
-      title: 'PORTAL BRIDGES',
+      title: 'OPERATIONS & SETTINGS',
       items: [
+        { label: 'Operations Settings', href: '/admin/settings', icon: Settings },
         { label: 'Tech Lead Console', href: '/tech-lead', icon: Terminal },
         { label: 'Public Website', href: '/', icon: ExternalLink },
       ],
@@ -141,10 +147,11 @@ export function ManagementSidebar({
       ],
     })
     sections.push({
-      title: 'ORGANIZATION',
+      title: 'ORGANIZATION & SETTINGS',
       items: [
         { label: 'Workforce Directory', href: '/tech-lead/people', icon: Users },
         { label: 'Attendance Overview', href: '/admin/attendance', icon: Clock },
+        { label: 'Executive Settings', href: '/ceo/settings', icon: Settings },
       ],
     })
     sections.push({
@@ -224,16 +231,20 @@ export function ManagementSidebar({
 
       {/* User Footer & Sign Out */}
       <div className="p-4 border-t border-[#2A2A26] bg-[#161614]/60">
-        <div className="flex items-center justify-between gap-2 mb-3 px-2">
+        <Link
+          href="/profile"
+          className="flex items-center justify-between gap-2 mb-3 p-2 rounded-xl hover:bg-white/[0.04] transition-colors group cursor-pointer"
+        >
           <div className="truncate">
-            <div className="text-[11px] font-medium text-[#F1EBDD] truncate">
+            <div className="text-[11px] font-medium text-[#F1EBDD] group-hover:text-white truncate">
               {userEmail || 'Internal Staff'}
             </div>
             <div className="text-[10px] font-mono text-[#68704A] uppercase truncate">
               Role: {userRole}
             </div>
           </div>
-        </div>
+          <User className="w-3.5 h-3.5 text-[#F1EBDD]/40 group-hover:text-[#A2AD7B] transition-colors shrink-0" />
+        </Link>
 
         <form action={signOut}>
           <button

@@ -476,6 +476,14 @@ export default function AttendanceDashboardPage() {
               {/* Action Buttons */}
               <div className="flex items-center gap-2">
                 <Link
+                  href="/admin/attendance"
+                  className="px-3 py-1.5 rounded-xl text-xs font-medium text-[#D4E0A5] bg-[#68704A]/25 hover:bg-[#68704A]/40 border border-[#68704A]/40 transition-colors hidden sm:inline-flex items-center gap-1.5"
+                >
+                  <Clock className="w-3.5 h-3.5 text-[#A2AD7B]" />
+                  <span>Central Hub</span>
+                </Link>
+
+                <Link
                   href="/admin"
                   className="px-3 py-1.5 rounded-xl text-xs font-medium text-[#F1EBDD]/80 hover:text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 transition-colors hidden sm:inline-flex items-center gap-1.5"
                 >

@@ -1,13 +1,14 @@
 'use client'
 
-import React, { useState, Suspense } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { signIn } from '@/lib/auth/actions'
 import { createClient } from '@/lib/supabase/client'
-import { LogIn, Eye, EyeOff, AlertCircle, Shield } from 'lucide-react'
+import { LogIn, Eye, EyeOff, AlertCircle, Shield, ArrowRight } from 'lucide-react'
 
 function LoginForm() {
+  const router = useRouter()
   const searchParams = useSearchParams()
   const redirectTo = searchParams.get('redirect') || ''
   const urlError = searchParams.get('error')
@@ -22,6 +23,48 @@ function LoginForm() {
   const [googleLoading, setGoogleLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
+  // Section 11: If user is already authenticated and active, redirect immediately to role dashboard
+  useEffect(() => {
+    async function checkExistingAuth() {
+      try {
+        const supabase = createClient()
+        const { data: { user } } = await supabase.auth.getUser()
+        if (user) {
+          // Check role and status from database
+          const { data: profile } = await supabase
+            .from('profiles')
+            .select('status, is_active')
+            .eq('id', user.id)
+            .maybeSingle()
+
+          if (profile && (profile.status === 'terminated' || profile.status === 'suspended' || !profile.is_active)) {
+            await supabase.auth.signOut()
+            setError('Access Revoked: Account has been suspended or terminated.')
+            return
+          }
+
+          const { data: userRoles } = await supabase
+            .from('user_roles')
+            .select('role')
+            .eq('user_id', user.id)
+
+          const roles = userRoles?.map((r) => r.role) ?? []
+
+          if (roles.includes('tech_lead')) {
+            router.replace('/tech-lead')
+          } else if (roles.includes('ceo')) {
+            router.replace('/ceo')
+          } else {
+            router.replace('/admin')
+          }
+        }
+      } catch {
+        // Not authenticated or network issue; stay on login page
+      }
+    }
+    checkExistingAuth()
+  }, [router])
+
   async function handleGoogleSignIn() {
     setGoogleLoading(true)
     setError(null)
@@ -30,7 +73,7 @@ function LoginForm() {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: 'https://somyainnovations.vercel.app',
+          redirectTo: `${typeof window !== 'undefined' ? window.location.origin : 'https://www.somyainnovations.in'}/auth/callback`,
         },
       })
       if (error) {
@@ -184,12 +227,105 @@ function LoginForm() {
             )}
             <span>{loading ? 'Signing in...' : 'Sign In'}</span>
           </button>
+
+          {/* Sign Up Link */}
+          <div className="text-center pt-2">
+            <span className="text-xs text-[#F1EBDD]/60 font-sans">
+              Don&apos;t have an account?{' '}
+            </span>
+            <Link
+              href="/signup"
+              className="text-xs font-semibold text-[#641F2A] hover:text-[#8E2B3B] transition-colors font-sans"
+            >
+              Sign Up
+            </Link>
+          </div>
         </form>
 
         {/* Security badge */}
         <div className="mt-6 pt-6 border-t border-[#2A2A26] flex items-center justify-center gap-2 text-[10px] text-[#F1EBDD]/40 font-mono">
           <Shield className="w-3.5 h-3.5" />
           <span>Encrypted session • Cookie-based auth</span>
+        </div>
+      </div>
+
+      {/* Management Portals Access Section */}
+      <div className="mt-8 pt-6 border-t border-[#2A2A26]">
+        <div className="text-center mb-4">
+          <span className="text-[10px] font-mono tracking-widest uppercase text-[#F1EBDD]/50 font-semibold">
+            MANAGEMENT PORTALS
+          </span>
+          <p className="text-[11px] text-[#F1EBDD]/40 font-sans mt-0.5">
+            Role-restricted operational & executive management systems
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          {/* Tech Lead Portal */}
+          <Link
+            href="/tech-lead"
+            className="group p-3 rounded-xl bg-[#161614] border border-[#2A2A26] hover:border-[#641F2A]/60 hover:bg-[#1B1B18] transition-all text-left flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between gap-1 mb-1">
+                <span className="text-xs font-semibold text-[#F1EBDD] group-hover:text-white">
+                  Tech Lead
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#68704A]" />
+              </div>
+              <p className="text-[10px] text-[#F1EBDD]/50 leading-tight">
+                Technical & System Management
+              </p>
+            </div>
+            <div className="mt-2.5 flex items-center gap-1 text-[10px] font-mono text-[#A2AD7B] group-hover:text-[#F1EBDD] transition-colors">
+              <span>Open Portal</span>
+              <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+            </div>
+          </Link>
+
+          {/* CEO Portal */}
+          <Link
+            href="/ceo"
+            className="group p-3 rounded-xl bg-[#161614] border border-[#2A2A26] hover:border-[#641F2A]/60 hover:bg-[#1B1B18] transition-all text-left flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between gap-1 mb-1">
+                <span className="text-xs font-semibold text-[#F1EBDD] group-hover:text-white">
+                  CEO
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#641F2A]" />
+              </div>
+              <p className="text-[10px] text-[#F1EBDD]/50 leading-tight">
+                Executive Management
+              </p>
+            </div>
+            <div className="mt-2.5 flex items-center gap-1 text-[10px] font-mono text-[#A2AD7B] group-hover:text-[#F1EBDD] transition-colors">
+              <span>Open Portal</span>
+              <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+            </div>
+          </Link>
+
+          {/* Admin Portal */}
+          <Link
+            href="/admin"
+            className="group p-3 rounded-xl bg-[#161614] border border-[#2A2A26] hover:border-[#641F2A]/60 hover:bg-[#1B1B18] transition-all text-left flex flex-col justify-between"
+          >
+            <div>
+              <div className="flex items-center justify-between gap-1 mb-1">
+                <span className="text-xs font-semibold text-[#F1EBDD] group-hover:text-white">
+                  Admin
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-[#641F2A]" />
+              </div>
+              <p className="text-[10px] text-[#F1EBDD]/50 leading-tight">
+                Business & Operations Management
+              </p>
+            </div>
+            <div className="mt-2.5 flex items-center gap-1 text-[10px] font-mono text-[#A2AD7B] group-hover:text-[#F1EBDD] transition-colors">
+              <span>Open Portal</span>
+              <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+            </div>
+          </Link>
         </div>
       </div>
 

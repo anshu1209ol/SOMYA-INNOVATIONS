@@ -1,6 +1,7 @@
 import React from 'react'
-import { requireRole } from '@/lib/auth/guards'
-import { ManagementSidebar } from '@/components/management/ManagementSidebar'
+import { redirect } from 'next/navigation'
+import { requireAuth } from '@/lib/auth/guards'
+import { AdminSidebar } from '@/components/management/AdminSidebar'
 
 export const dynamic = 'force-dynamic'
 
@@ -9,12 +10,18 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode
 }) {
-  const context = await requireRole('admin')
+  const context = await requireAuth()
+
+  const isAdmin = context.roles.includes('admin')
+  const isTechLead = context.roles.includes('tech_lead')
+
+  if (!isAdmin && !isTechLead) {
+    redirect('/unauthorized')
+  }
 
   return (
     <div className="flex min-h-screen bg-[#0D0D0B] text-[#F1EBDD]">
-      <ManagementSidebar
-        portal="admin"
+      <AdminSidebar
         userEmail={context.user.email}
         userRole={context.roles[0] || 'admin'}
       />

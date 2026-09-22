@@ -38,7 +38,7 @@ export async function getCurrentProfile(): Promise<
     .from('profiles')
     .select('*')
     .eq('id', user.id)
-    .single()
+    .maybeSingle()
 
   if (!profile) return null
 
@@ -67,7 +67,7 @@ export async function getCurrentUserContext(): Promise<UserContext | null> {
     .from('profiles')
     .select('*')
     .eq('id', user.id)
-    .single()
+    .maybeSingle()
 
   if (!profile) return null
 
@@ -122,9 +122,6 @@ export async function requireAuth() {
 export async function requireRole(requiredRole: AppRole): Promise<UserContext> {
   const context = await requireAuth()
 
-  // Tech Lead is system superauthority with access to tech-lead and inspection
-  const isTechLead = context.roles.includes('tech_lead')
-
   // Check direct role assignment
   const hasDirectRole = context.roles.includes(requiredRole)
 
@@ -132,12 +129,7 @@ export async function requireRole(requiredRole: AppRole): Promise<UserContext> {
     return context
   }
 
-  // Tech Lead can inspect other management portals if needed for system maintenance
-  if (isTechLead && requiredRole !== 'tech_lead') {
-    return context
-  }
-
-  // Cross-portal isolation: admin and ceo cannot access tech_lead portal
+  // Strict cross-portal isolation: reject any user without the required role
   redirect('/unauthorized')
 }
 

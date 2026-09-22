@@ -24,7 +24,7 @@ COMMENT ON TABLE public.employees IS 'Workforce directory and current day attend
 
 -- ─── 2. ATTENDANCE PUNCHES / SHIFTS TABLE ──────────────────────────────────────
 CREATE TABLE IF NOT EXISTS public.attendance_punches (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   employee_id TEXT NOT NULL REFERENCES public.employees(id) ON DELETE CASCADE,
   punch_in TIMESTAMPTZ NOT NULL DEFAULT now(),
   punch_out TIMESTAMPTZ,
@@ -37,7 +37,7 @@ COMMENT ON TABLE public.attendance_punches IS 'Historical and active clock-in/cl
 
 -- ─── 3. LEAVE REQUESTS TABLE ───────────────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS public.leave_requests (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   employee_id TEXT REFERENCES public.employees(id) ON DELETE SET NULL,
   employee_name TEXT NOT NULL,
   dept TEXT NOT NULL,

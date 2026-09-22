@@ -12,15 +12,23 @@ import {
   CheckCircle2,
   Server,
   ArrowRight,
-  Sparkles,
+  Shield,
+  Cpu,
+  CheckSquare,
+  Clock,
+  AlertOctagon,
 } from 'lucide-react'
 import { createMetadata } from '@/lib/seo'
-import { getTechLeadDashboardMetrics } from '@/lib/actions/engineering'
+import {
+  getTechLeadDashboardMetrics,
+  getTechnicalIssues,
+  getEngineeringTasks,
+} from '@/lib/actions/engineering'
 import { ManagementHeader } from '@/components/management/ManagementHeader'
 
 export const metadata: Metadata = createMetadata({
-  title: 'Engineering Telemetry & Systems Architecture | Tech Lead Portal',
-  description: 'Systems architecture, runtime telemetry, service health, and code release standards for SOMYA INNOVATIONS engineering leadership.',
+  title: 'Engineering Command & Systems Telemetry | SOMYA Tech Lead',
+  description: 'Systems architecture, runtime telemetry, engineering sprint velocity, and technical release command for SOMYA INNOVATIONS leadership.',
   path: '/tech-lead',
   noIndex: true,
 })
@@ -63,43 +71,68 @@ const SERVICE_HEALTH = [
 ]
 
 export default async function TechLeadPortalPage() {
-  const metrics = await getTechLeadDashboardMetrics()
+  const [metrics, issues, tasks] = await Promise.all([
+    getTechLeadDashboardMetrics(),
+    getTechnicalIssues(),
+    getEngineeringTasks(),
+  ])
+
+  // Group tasks by Kanban stage
+  const kanbanStages = {
+    backlog: tasks.filter((t) => t.status === 'backlog').length,
+    todo: tasks.filter((t) => t.status === 'todo').length,
+    in_progress: tasks.filter((t) => t.status === 'in_progress').length,
+    code_review: tasks.filter((t) => t.status === 'code_review').length,
+    testing: tasks.filter((t) => t.status === 'testing').length,
+    done: tasks.filter((t) => t.status === 'done').length,
+  }
+
+  const criticalIssues = issues.filter((i) => i.severity === 'critical' || i.severity === 'high').slice(0, 5)
 
   return (
     <div className="space-y-8">
       <ManagementHeader
         title="Engineering Command & Telemetry"
-        subtitle="Live architectural telemetry, runtime cluster health, and engineering team metrics."
+        subtitle="Systems architecture, runtime telemetry, engineering sprint velocity, and technical release command."
         actions={
-          <Link
-            href="/tech-lead/people"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#641F2A] hover:bg-[#852E3B] text-[#F1EBDD] text-xs font-semibold shadow-sm transition-colors"
-          >
-            <Users className="w-3.5 h-3.5" />
-            <span>Manage People & Access</span>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/tech-lead/sprints"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-[#F1EBDD] text-xs font-mono border border-[#2A2A26] transition-colors"
+            >
+              <GitBranch className="w-3.5 h-3.5 text-[#A2AD7B]" />
+              <span>Sprint Kanban</span>
+            </Link>
+            <Link
+              href="/tech-lead/people"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#641F2A] hover:bg-[#852E3B] text-[#F1EBDD] text-xs font-semibold shadow-sm transition-colors"
+            >
+              <Users className="w-3.5 h-3.5" />
+              <span>People & Access</span>
+            </Link>
+          </div>
         }
       />
 
-      {/* Real Metric KPI Cards */}
+      {/* Engineering KPI Metrics */}
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <div className="p-5 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-2">
           <div className="flex items-center justify-between text-[#F1EBDD]/60 text-xs font-mono">
-            <span>ACTIVE PROJECTS</span>
+            <span>ENGINEERING PROJECTS</span>
             <Layers className="w-4 h-4 text-[#A2AD7B]" />
           </div>
           <div className="text-3xl font-bold font-serif text-[#F1EBDD]">
             {metrics.activeProjectsCount}
           </div>
           <p className="text-[11px] text-[#F1EBDD]/50 font-mono">
-            {metrics.activeProjectsCount === 0 ? 'No active client projects' : 'In development phase'}
+            {metrics.activeProjectsCount === 0 ? 'No active engineering projects' : 'In development pipeline'}
           </p>
         </div>
 
         <div className="p-5 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-2">
           <div className="flex items-center justify-between text-[#F1EBDD]/60 text-xs font-mono">
             <span>OPEN TASKS</span>
-            <GitBranch className="w-4 h-4 text-[#A2AD7B]" />
+            <CheckSquare className="w-4 h-4 text-[#A2AD7B]" />
           </div>
           <div className="text-3xl font-bold font-serif text-[#F1EBDD]">
             {metrics.openTasksCount}
@@ -111,7 +144,7 @@ export default async function TechLeadPortalPage() {
 
         <div className="p-5 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-2">
           <div className="flex items-center justify-between text-[#F1EBDD]/60 text-xs font-mono">
-            <span>CRITICAL ISSUES</span>
+            <span>CRITICAL BLOCKERS</span>
             <AlertTriangle className={`w-4 h-4 ${metrics.criticalIssuesCount > 0 ? 'text-red-400' : 'text-[#68704A]'}`} />
           </div>
           <div className={`text-3xl font-bold font-serif ${metrics.criticalIssuesCount > 0 ? 'text-red-400' : 'text-[#F1EBDD]'}`}>
@@ -136,7 +169,118 @@ export default async function TechLeadPortalPage() {
         </div>
       </section>
 
-      {/* Service Runtime Telemetry Table */}
+      {/* Technical Sprint & Kanban Pipeline Summary */}
+      <section className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <GitBranch className="w-4 h-4 text-[#A2AD7B]" />
+            <h3 className="text-sm font-bold text-[#F1EBDD] font-mono uppercase tracking-wide">
+              Sprint Velocity & Kanban Stages ({tasks.length} tasks)
+            </h3>
+          </div>
+          <Link
+            href="/tech-lead/sprints"
+            className="text-xs font-mono text-[#E8DFCF] hover:underline"
+          >
+            Interactive Kanban &rarr;
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          <div className="p-3.5 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+            <span className="text-[10px] font-mono text-[#F1EBDD]/50 uppercase">Backlog</span>
+            <div className="text-xl font-bold font-mono text-[#F1EBDD]">{kanbanStages.backlog}</div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+            <span className="text-[10px] font-mono text-[#E8DFCF]/70 uppercase">To Do</span>
+            <div className="text-xl font-bold font-mono text-[#E8DFCF]">{kanbanStages.todo}</div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+            <span className="text-[10px] font-mono text-amber-300 uppercase">In Progress</span>
+            <div className="text-xl font-bold font-mono text-amber-300">{kanbanStages.in_progress}</div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+            <span className="text-[10px] font-mono text-[#A2AD7B] uppercase">Code Review</span>
+            <div className="text-xl font-bold font-mono text-[#A2AD7B]">{kanbanStages.code_review}</div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+            <span className="text-[10px] font-mono text-[#E8DFCF] uppercase">Testing</span>
+            <div className="text-xl font-bold font-mono text-[#E8DFCF]">{kanbanStages.testing}</div>
+          </div>
+
+          <div className="p-3.5 rounded-xl bg-[#1B1B18] border border-[#2A2A26] space-y-1">
+            <span className="text-[10px] font-mono text-[#68704A] uppercase">Done</span>
+            <div className="text-xl font-bold font-mono text-[#68704A]">{kanbanStages.done}</div>
+          </div>
+        </div>
+      </section>
+
+      {/* Issues Triage & Severity Matrix */}
+      <section className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-[#A2AD7B]" />
+            <h3 className="text-sm font-bold text-[#F1EBDD] font-mono uppercase tracking-wide">
+              Technical Issues & Blocker Radar ({issues.length})
+            </h3>
+          </div>
+          <Link
+            href="/tech-lead/issues"
+            className="text-xs font-mono text-[#E8DFCF] hover:underline"
+          >
+            Issues tracker &rarr;
+          </Link>
+        </div>
+
+        {criticalIssues.length === 0 ? (
+          <p className="text-xs font-mono text-[#F1EBDD]/50 py-6 text-center">
+            Zero active high-severity or critical issues logged in the system.
+          </p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-xs">
+              <thead className="bg-[#1B1B18] text-[#F1EBDD]/50 font-mono text-[10px] uppercase border-b border-[#2A2A26]">
+                <tr>
+                  <th className="px-3 py-2.5">Issue Title</th>
+                  <th className="px-3 py-2.5">Severity</th>
+                  <th className="px-3 py-2.5">Status</th>
+                  <th className="px-3 py-2.5">Created</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-[#2A2A26] text-[#F1EBDD]/80">
+                {criticalIssues.map((iss) => (
+                  <tr key={iss.id} className="hover:bg-white/[0.02]">
+                    <td className="px-3 py-3 font-semibold text-[#F1EBDD]">
+                      {iss.title}
+                    </td>
+                    <td className="px-3 py-3">
+                      <span className={`px-2 py-0.5 rounded text-[10px] font-mono uppercase ${
+                        iss.severity === 'critical'
+                          ? 'bg-[#641F2A]/30 text-red-300 border border-[#641F2A]/50'
+                          : 'bg-amber-950/40 text-amber-300 border border-amber-800/40'
+                      }`}>
+                        {iss.severity}
+                      </span>
+                    </td>
+                    <td className="px-3 py-3 font-mono text-[#E8DFCF]">
+                      {iss.status}
+                    </td>
+                    <td className="px-3 py-3 font-mono text-[#F1EBDD]/40">
+                      {new Date(iss.created_at).toLocaleDateString()}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+
+      {/* Systems Runtime Telemetry Table */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <div>
@@ -149,7 +293,7 @@ export default async function TechLeadPortalPage() {
           </div>
           <div className="flex items-center gap-2 text-xs font-mono text-[#A2AD7B]">
             <span className="w-2 h-2 rounded-full bg-[#68704A] animate-pulse" />
-            <span>Systems Normal</span>
+            <span>Systems Operational</span>
           </div>
         </div>
 
@@ -197,7 +341,7 @@ export default async function TechLeadPortalPage() {
       </section>
 
       {/* Fast Shortcuts Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
         <Link
           href="/tech-lead/people"
           className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] hover:border-[#641F2A]/60 transition-all group space-y-2 block"
@@ -235,7 +379,7 @@ export default async function TechLeadPortalPage() {
           className="p-6 rounded-2xl bg-[#161614] border border-[#2A2A26] hover:border-[#641F2A]/60 transition-all group space-y-2 block"
         >
           <div className="flex items-center justify-between">
-            <Terminal className="w-5 h-5 text-[#E8DFCF]" />
+            <Shield className="w-5 h-5 text-[#E8DFCF]" />
             <ArrowRight className="w-4 h-4 text-[#F1EBDD]/40 group-hover:text-[#F1EBDD] group-hover:translate-x-1 transition-all" />
           </div>
           <h3 className="text-sm font-bold text-[#F1EBDD] tracking-tight pt-2">

@@ -12,10 +12,20 @@ export async function GET(request: Request) {
 
   if (code) {
     const supabase = await createClient()
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    const { data, error } = await supabase.auth.exchangeCodeForSession(code)
 
-    if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
+    if (!error && data.user) {
+      const { getDashboardForUser } = await import('@/lib/auth/actions')
+      const { destination, error: roleError } = await getDashboardForUser(data.user.id)
+
+      if (roleError) {
+        await supabase.auth.signOut()
+        return NextResponse.redirect(`${origin}/unauthorized?reason=account_revoked`)
+      }
+
+      // If user had a requested authorized destination, use it if allowed
+      const finalDest = (next && next !== '/admin' && next.startsWith('/')) ? next : destination
+      return NextResponse.redirect(`${origin}${finalDest}`)
     }
   }
 

@@ -3,6 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { Shield, ExternalLink } from 'lucide-react'
+import { TopUserMenu } from '@/components/management/TopUserMenu'
 import type { AppRole } from '@/types'
 
 interface ManagementHeaderProps {
@@ -48,6 +49,13 @@ export function ManagementHeader({
           <Shield className="w-3.5 h-3.5 text-[#68704A]" />
           <span>RLS Active</span>
         </div>
+        <TopUserMenu
+          user={{
+            id: '',
+            email: userEmail,
+            role: role,
+          }}
+        />
       </div>
     </header>
   )

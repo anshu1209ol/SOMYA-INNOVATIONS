@@ -1,6 +1,6 @@
 import React from 'react'
 import { requireRole } from '@/lib/auth/guards'
-import { ManagementSidebar } from '@/components/management/ManagementSidebar'
+import { CeoSidebar } from '@/components/management/CeoSidebar'
 
 export const dynamic = 'force-dynamic'
 
@@ -13,8 +13,7 @@ export default async function CeoLayout({
 
   return (
     <div className="flex min-h-screen bg-[#0D0D0B] text-[#F1EBDD]">
-      <ManagementSidebar
-        portal="ceo"
+      <CeoSidebar
         userEmail={context.user.email}
         userRole={context.roles[0] || 'ceo'}
       />

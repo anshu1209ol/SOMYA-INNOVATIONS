@@ -5,7 +5,7 @@ import { updateSession } from '@/lib/supabase/middleware'
  * Protected route prefixes that require authentication.
  * Unauthenticated users are redirected to /login.
  */
-const PROTECTED_PREFIXES = ['/admin', '/ceo', '/tech-lead']
+const PROTECTED_PREFIXES = ['/admin', '/ceo', '/tech-lead', '/profile', '/settings']
 
 /**
  * Public routes that should never trigger auth redirects.
@@ -90,7 +90,7 @@ export async function proxy(request: NextRequest) {
     }
   }
 
-  const { user, supabaseResponse } = await updateSession(request)
+  const { user, supabase, supabaseResponse } = await updateSession(request)
   const { pathname } = request.nextUrl
 
   // Legacy attendance compatibility redirect
@@ -98,6 +98,28 @@ export async function proxy(request: NextRequest) {
     const adminAttendanceUrl = request.nextUrl.clone()
     adminAttendanceUrl.pathname = '/admin/attendance'
     return NextResponse.redirect(adminAttendanceUrl, 307)
+  }
+
+  // If an OAuth code landed on public home or non-callback route, redirect to role dashboard
+  const code = request.nextUrl.searchParams.get('code')
+  if (code && !pathname.startsWith('/auth/callback') && user) {
+    const { data: userRoles } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', user.id)
+
+    const roles = (userRoles as Array<{ role: string }> | null)?.map((r) => r.role) ?? []
+
+    const targetUrl = request.nextUrl.clone()
+    targetUrl.searchParams.delete('code')
+    if (roles.includes('tech_lead')) {
+      targetUrl.pathname = '/tech-lead'
+    } else if (roles.includes('ceo')) {
+      targetUrl.pathname = '/ceo'
+    } else {
+      targetUrl.pathname = '/admin'
+    }
+    return NextResponse.redirect(targetUrl)
   }
 
   // Protected routes: redirect to login if not authenticated
@@ -108,11 +130,24 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
-  // If user is authenticated and visiting /login, redirect to admin
+  // If user is authenticated and visiting /login, redirect to role-specific dashboard
   if (user && pathname === '/login') {
-    const adminUrl = request.nextUrl.clone()
-    adminUrl.pathname = '/admin'
-    return NextResponse.redirect(adminUrl)
+    const { data: userRoles } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', user.id)
+
+    const roles = (userRoles as Array<{ role: string }> | null)?.map((r) => r.role) ?? []
+
+    const targetUrl = request.nextUrl.clone()
+    if (roles.includes('tech_lead')) {
+      targetUrl.pathname = '/tech-lead'
+    } else if (roles.includes('ceo')) {
+      targetUrl.pathname = '/ceo'
+    } else {
+      targetUrl.pathname = '/admin'
+    }
+    return NextResponse.redirect(targetUrl)
   }
 
   return supabaseResponse

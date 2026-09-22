@@ -358,6 +358,16 @@ export async function terminateUser(
       .delete()
       .eq('user_id', targetUserId)
 
+    // Revoke attendance access / update employee record while preserving historical records
+    await adminClient
+      .from('employees')
+      .update({
+        status: 'Absent',
+        location: 'Terminated - Access Revoked',
+        updated_at: now
+      })
+      .eq('user_id', targetUserId)
+
     // 6. Revoke active auth sessions via Admin API
     try {
       await adminClient.auth.admin.signOut(targetUserId)

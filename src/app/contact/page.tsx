@@ -35,26 +35,26 @@ const CONTACT_CARDS = [
   {
     icon: Phone,
     label: "Phone",
-    value: "[YOUR PHONE]",
+    value: "+91 6261058029 ",
     subtext: "Mon-Sat during business hours",
   },
   {
     icon: Mail,
     label: "Email",
-    value: "[YOUR EMAIL]",
+    value: "somyainnovationsco@gmail.com",
     subtext: "Direct solutions and engineering inbox",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "[YOUR CITY]",
+    value: "Gwalior",
     subtext: "Operational facilities & corporate hub",
   },
   {
     icon: Clock,
     label: "Business Hours",
-    value: "[BUSINESS HOURS]",
-    subtext: "Indian Standard Time (IST)",
+    value: "24/7",
+    subtext: "All Timezones Available",
   },
 ];
 
@@ -169,12 +169,12 @@ export default function ContactPage() {
                   Operating Location
                 </H2>
                 <Text className="text-xs sm:text-sm text-[#11110F]/70 leading-relaxed">
-                  Headquartered in [YOUR CITY] with capabilities to provide technology deployment, infrastructure staging, and digital software solutions regionally and pan-India.
+                  Headquartered in [Gwalior] with capabilities to provide technology deployment, infrastructure staging, and digital software solutions regionally and pan-India.
                 </Text>
               </div>
 
               {/* Map Placeholder */}
-              <MapPlaceholder city="[YOUR CITY]" />
+              <MapPlaceholder city="[Gwalior]" />
             </div>
           </div>
         </section>

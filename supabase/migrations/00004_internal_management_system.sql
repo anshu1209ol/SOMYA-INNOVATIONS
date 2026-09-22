@@ -79,10 +79,12 @@ BEGIN
   END IF;
 END $$;
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 -- ─── 2. IMMUTABLE AUDIT LOGS TABLE ─────────────────────────────────────────────
 
 CREATE TABLE IF NOT EXISTS public.audit_logs (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   actor_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
   action TEXT NOT NULL,
   target_user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
